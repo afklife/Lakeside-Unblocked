@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: lakeside-arcade
+    runtime: node
+    plan: 0.5c-512mb
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /
+    domains:
+      - lakesideunblocked.com
+    renderSubdomainPolicy: disabled
+    envVars:
+      - key: WEBSITE_PASSWORD
+        sync: false
