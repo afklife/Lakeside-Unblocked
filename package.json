@@ -1,0 +1,16 @@
+{
+  "name": "lakeside-unblocked",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": "22.x"
+  },
+  "dependencies": {
+    "three": "^0.180.0",
+    "ws": "^8.18.0"
+  }
+}

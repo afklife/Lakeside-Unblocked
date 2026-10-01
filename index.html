@@ -1,0 +1,1768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="theme-color" content="#f4f5ef">
+	<title>Lakeside Unblocked | Game Library</title>
+	<style>
+		:root {
+			color-scheme: light;
+			--ink: #20251f;
+			--muted: #777c72;
+			--paper: #f4f5ef;
+			--line: #e4e6dc;
+			--green: #285c45;
+			--lime: #d9f36a;
+			--serif: Georgia, "Times New Roman", serif;
+			--sans: "Trebuchet MS", "Gill Sans", sans-serif;
+		}
+
+		* { box-sizing: border-box; }
+
+		body {
+			margin: 0;
+			background: var(--paper);
+			color: var(--ink);
+			font-family: var(--sans);
+		}
+
+		button, input { font: inherit; }
+		a { color: inherit; }
+
+		.topbar {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			max-width: 1200px;
+			margin: auto;
+			padding: 22px 32px;
+			border-bottom: 1px solid var(--line);
+		}
+
+		.brand {
+			display: inline-flex;
+			align-items: center;
+			gap: 10px;
+			font-size: 15px;
+			font-weight: 800;
+			letter-spacing: .04em;
+			text-decoration: none;
+		}
+
+		.brand-mark {
+			display: grid;
+			width: 30px;
+			aspect-ratio: 1;
+			place-items: center;
+			border-radius: 9px;
+			background: var(--green);
+			color: white;
+			font-size: 17px;
+		}
+
+		.top-note {
+			color: var(--muted);
+			font-size: 13px;
+		}
+
+		.top-actions { display: flex; align-items: center; gap: 12px; }
+		.logout-button { min-height: 34px; padding: 0 10px; border: 1px solid var(--line); border-radius: 3px; background: transparent; color: var(--muted); cursor: pointer; font-size: 12px; font-weight: 800; }
+		.logout-button:hover { border-color: var(--green); color: var(--green); }
+
+		main {
+			width: min(100% - 48px, 1136px);
+			margin: 0 auto;
+		}
+
+		.intro {
+			display: grid;
+			grid-template-columns: 1fr auto;
+			align-items: end;
+			gap: 24px;
+			padding: 56px 0 34px;
+		}
+
+		.eyebrow {
+			margin: 0 0 12px;
+			color: var(--green);
+			font-size: 11px;
+			font-weight: 800;
+			letter-spacing: .16em;
+			text-transform: uppercase;
+		}
+
+		h1 {
+			margin: 0;
+			font-family: var(--serif);
+			font-size: clamp(38px, 6vw, 64px);
+			font-weight: 500;
+			line-height: .98;
+		}
+
+		.intro-copy {
+			max-width: 360px;
+			margin: 0 0 4px;
+			color: var(--muted);
+			font-size: 15px;
+			line-height: 1.65;
+		}
+
+		.toolbar {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 16px;
+			padding: 16px 0;
+			border-top: 1px solid var(--line);
+			border-bottom: 1px solid var(--line);
+		}
+
+		.filters {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 6px;
+		}
+
+		.filter {
+			min-height: 36px;
+			padding: 0 14px;
+			border: 1px solid transparent;
+			border-radius: 3px;
+			background: transparent;
+			color: var(--muted);
+			cursor: pointer;
+			font-size: 13px;
+			font-weight: 700;
+		}
+
+		.filter:hover { color: var(--ink); }
+
+		.filter[aria-pressed="true"] {
+			border-color: var(--line);
+			background: white;
+			color: var(--ink);
+		}
+
+		.search-wrap {
+			position: relative;
+			width: min(100%, 245px);
+		}
+
+		.search-wrap::before {
+			position: absolute;
+			top: 50%;
+			left: 13px;
+			color: var(--muted);
+			content: "⌕";
+			font-size: 22px;
+			line-height: 1;
+			transform: translateY(-55%);
+		}
+
+		.search {
+			width: 100%;
+			min-height: 40px;
+			padding: 0 12px 0 38px;
+			border: 1px solid var(--line);
+			border-radius: 3px;
+			background: #fff;
+			color: var(--ink);
+			outline-offset: 3px;
+			font-size: 13px;
+		}
+
+		.section-heading {
+			display: flex;
+			align-items: baseline;
+			justify-content: space-between;
+			gap: 16px;
+			margin: 29px 0 16px;
+		}
+
+		h2 {
+			margin: 0;
+			font-family: var(--serif);
+			font-size: 25px;
+			font-weight: 500;
+		}
+
+		#result-count {
+			color: var(--muted);
+			font-size: 12px;
+		}
+
+		.game-grid {
+			display: grid;
+			grid-template-columns: repeat(4, minmax(0, 1fr));
+			gap: 18px;
+			padding-bottom: 64px;
+		}
+
+		.game-card {
+			min-width: 0;
+			border: 1px solid var(--line);
+			border-radius: 4px;
+			background: #fff;
+			transition: transform 160ms ease, box-shadow 160ms ease;
+		}
+
+		.game-card:hover {
+			transform: translateY(-3px);
+			box-shadow: 0 10px 24px #20251f12;
+		}
+
+		.game-card[hidden] { display: none; }
+
+		.game-art {
+			position: relative;
+			display: grid;
+			height: 145px;
+			place-items: center;
+			overflow: hidden;
+			isolation: isolate;
+		}
+
+		.game-art::before, .game-art::after {
+			position: absolute;
+			z-index: -1;
+			content: "";
+		}
+
+		.game-art::before {
+			inset: 0;
+			background-image: linear-gradient(135deg, #ffffff20 25%, transparent 25%, transparent 50%, #ffffff20 50%, #ffffff20 75%, transparent 75%);
+			background-size: 24px 24px;
+			opacity: .7;
+		}
+
+		.game-icon {
+			font-size: 52px;
+			filter: drop-shadow(0 5px 2px #17211624);
+			transform: rotate(-5deg);
+		}
+
+		.art-tetris { background: #b1c8e1; }
+		.art-tetris::after { right: 14%; bottom: 0; width: 73px; height: 52px; background: linear-gradient(90deg, #e96d55 50%, #f1ca57 50%); clip-path: polygon(0 0, 50% 0, 50% 50%, 100% 50%, 100% 100%, 0 100%); }
+		.art-2048 { background: #e9d8bd; }
+		.art-2048::after { right: 18%; bottom: 16px; width: 52px; aspect-ratio: 1; border-radius: 7px; background: #d88752; box-shadow: -58px 0 #f1c981, 0 -58px #f1c981; }
+		.art-chess { background: #d4d7bb; }
+		.art-voxel { background: #9fc6a0; }
+		.art-homework { background: #e8bd74; }
+		.art-gta { background: #8bb69b; }
+		.art-retro { background: #e7a16f; }
+		.art-dino { background: #d2e6e2; }
+		.art-wordle { background: #b8ceb0; }
+
+		.game-info { padding: 14px 15px 15px; }
+
+		.game-category {
+			margin: 0 0 5px;
+			color: var(--green);
+			font-size: 10px;
+			font-weight: 800;
+			letter-spacing: .12em;
+			text-transform: uppercase;
+		}
+
+		.game-title-row {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 8px;
+		}
+
+		.game-title {
+			overflow: hidden;
+			margin: 0;
+			font-size: 16px;
+			font-weight: 800;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+
+		.play-link {
+			display: inline-flex;
+			flex: 0 0 auto;
+			align-items: center;
+			justify-content: center;
+			min-height: 32px;
+			padding: 0 11px;
+			border-radius: 3px;
+			background: var(--green);
+			color: #fff;
+			font-size: 12px;
+			font-weight: 800;
+			text-decoration: none;
+		}
+
+		.play-link:hover { background: #1d4935; }
+
+		.empty-state {
+			display: none;
+			padding: 46px 16px;
+			color: var(--muted);
+			text-align: center;
+		}
+
+		.empty-state.visible { display: block; }
+
+		#game-view[hidden] { display: none; }
+
+		.gamebar {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 16px;
+			padding: 23px 0;
+		}
+
+		.back-link {
+			color: var(--green);
+			font-size: 13px;
+			font-weight: 800;
+			text-decoration: none;
+		}
+
+		.gamebar h1 { font-size: 32px; }
+
+		.online-room {
+			margin-bottom: 14px;
+			padding: 12px 14px;
+			border: 1px solid var(--line);
+			border-radius: 4px;
+			background: #fff;
+		}
+		.online-room[hidden] { display: none; }
+		.online-room-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+		.online-room-title { display: flex; align-items: baseline; gap: 9px; }
+		.online-room-title strong { font-size: 13px; }
+		.online-room-title span, .online-room-status { color: var(--muted); font-size: 12px; }
+		.online-room-status.connected { color: var(--green); font-weight: 800; }
+		.online-room-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+		.online-room-input { width: 116px; min-height: 34px; padding: 0 8px; border: 1px solid var(--line); border-radius: 3px; font-size: 12px; }
+		.online-room-button { min-height: 34px; padding: 0 10px; border: 1px solid #d6ddd1; border-radius: 3px; background: #f9faf6; color: var(--ink); cursor: pointer; font-size: 12px; font-weight: 800; }
+		.online-room-button.primary { border-color: var(--green); background: var(--green); color: white; }
+		.online-room-button:disabled { cursor: default; opacity: .55; }
+		.online-room-info { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 9px; color: var(--muted); font-size: 11px; }
+		.online-room-code { color: var(--green); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px; font-weight: 900; letter-spacing: .08em; }
+		.online-room-players { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+		.online-room-scores { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+		.online-score { display: inline-flex; align-items: center; gap: 5px; padding: 5px 8px; border-radius: 3px; background: #f0f3eb; color: #465147; font-size: 11px; }
+		.online-score strong { color: var(--green); }
+
+		.game-stage {
+			min-height: 440px;
+			padding: 28px;
+			border-radius: 5px;
+			background: radial-gradient(ellipse at 50% 0%, #394b40 0%, #202c26 70%);
+			color: #f7f6ec;
+			animation: stage-enter 360ms cubic-bezier(.2, .8, .2, 1) both;
+		}
+
+		.game-layout {
+			display: grid;
+			grid-template-columns: minmax(0, 1fr) 220px;
+			align-items: start;
+			justify-items: center;
+			gap: 28px;
+			max-width: 900px;
+			margin: auto;
+		}
+
+		.game-board-wrap { width: 100%; }
+
+		.game-aside {
+			width: 100%;
+			padding: 18px;
+			border: 1px solid #ffffff25;
+			border-radius: 4px;
+			background: #ffffff0a;
+		}
+
+		.game-aside h2 { margin-bottom: 16px; font-family: var(--sans); font-size: 16px; font-weight: 800; }
+
+		.stat-row {
+			display: flex;
+			justify-content: space-between;
+			gap: 12px;
+			padding: 10px 0;
+			border-bottom: 1px solid #ffffff1c;
+			color: #c3cec5;
+			font-size: 13px;
+		}
+
+		.stat-row strong { color: #fff; }
+
+		.game-button {
+			min-height: 40px;
+			padding: 0 14px;
+			border: 1px solid #ffffff3d;
+			border-radius: 3px;
+			background: #ffffff12;
+			color: #fff;
+			cursor: pointer;
+			font-size: 13px;
+			font-weight: 800;
+			transition: transform 130ms ease, background 130ms ease, box-shadow 130ms ease;
+		}
+
+		.game-button:hover, .game-button.selected { background: #d9f36a; color: #20251f; box-shadow: 0 3px 12px #d9f36a30; }
+		.game-button:hover { transform: translateY(-1px); }
+		.game-button:active { transform: translateY(1px) scale(.98); }
+
+		.button-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+
+		.game-message { min-height: 22px; margin: 12px 0 0; color: #d9f36a; font-size: 13px; line-height: 1.5; }
+
+		.tetris-canvas { display: block; width: min(100%, 300px); height: auto; margin: auto; border: 2px solid #58655c; background: #131a16; box-shadow: 0 18px 40px #0005; }
+		.game-stage.line-clear .tetris-canvas { animation: clear-flash 460ms ease-out; }
+		.game-stage.impact { animation: impact-shake 360ms ease-out; }
+		.game-stage.touchdown { animation: touchdown-glow 780ms ease-out; }
+
+		.mobile-controls { display: grid; grid-template-columns: repeat(3, 48px); justify-content: center; gap: 7px; margin-top: 15px; }
+		.mobile-controls .game-button { min-width: 48px; padding: 0; font-size: 18px; }
+		.mobile-controls .up { grid-column: 2; }
+		.mobile-controls .left { grid-column: 1; }
+		.mobile-controls .down { grid-column: 2; }
+		.mobile-controls .right { grid-column: 3; }
+
+		.tiles-board {
+			display: grid;
+			grid-template-columns: repeat(4, minmax(54px, 78px));
+			gap: 9px;
+			width: max-content;
+			max-width: 100%;
+			margin: auto;
+			padding: 10px;
+			border-radius: 5px;
+			background: #617364;
+			box-shadow: inset 0 2px 8px #17251c55, 0 16px 32px #0003;
+		}
+
+		.tile {
+			position: relative;
+			display: grid;
+			width: 100%;
+			aspect-ratio: 1;
+			place-items: center;
+			border-radius: 3px;
+			background: #d8dfd3;
+			color: #26332a;
+			font-size: clamp(20px, 5vw, 34px);
+			font-weight: 900;
+			box-shadow: inset 0 2px 1px #ffffff65, 0 2px 3px #28382c24;
+		}
+
+		.tile.tile-spawn { animation: tile-spawn 220ms cubic-bezier(.2, 1.4, .4, 1) both; }
+		.tile.tile-merged { z-index: 1; animation: tile-merge 240ms cubic-bezier(.2, 1.5, .4, 1) both; }
+
+		.tile[data-value="2"] { background: #f3efe2; }
+		.tile[data-value="4"] { background: #e8dcae; }
+		.tile[data-value="8"] { background: #e6b86c; color: white; }
+		.tile[data-value="16"] { background: #db8a55; color: white; }
+		.tile[data-value="32"] { background: #cf6748; color: white; }
+		.tile[data-value="64"], .tile[data-value="128"], .tile[data-value="256"], .tile[data-value="512"], .tile[data-value="1024"], .tile[data-value="2048"] { background: #557d65; color: white; font-size: clamp(17px, 4vw, 27px); }
+
+		.chess-board {
+			display: grid;
+			grid-template-columns: repeat(8, minmax(34px, 66px));
+			width: min(100%, 528px);
+			margin: auto;
+			border: 8px solid #4b362c;
+			box-shadow: 0 12px 24px #0004;
+		}
+
+		.chess-square {
+			position: relative;
+			display: grid;
+			aspect-ratio: 1;
+			place-items: center;
+			padding: 0;
+			border: 0;
+			color: #19231e;
+			cursor: pointer;
+			font-family: Georgia, serif;
+			font-size: clamp(27px, 6vw, 49px);
+			line-height: 1;
+		}
+
+		.chess-square.light { background: #e8ddc6; }
+		.chess-square.dark { background: #739078; }
+		.chess-square.selected { box-shadow: inset 0 0 0 4px #f0df62; }
+		.chess-square.legal::after { position: absolute; width: 22%; aspect-ratio: 1; border-radius: 50%; background: #263a2da8; content: ""; pointer-events: none; }
+		.chess-square.legal.occupied::after { width: calc(100% - 12px); border: 3px solid #e9c554; border-radius: 0; background: transparent; }
+		.chess-square.last-from, .chess-square.last-to { animation: move-highlight 620ms ease-out; }
+		.chess-square.last-from { box-shadow: inset 0 0 0 4px #f0df625c; }
+		.chess-square.last-to { box-shadow: inset 0 0 0 4px #f0df62; }
+		.chess-square.last-move { animation: move-highlight 620ms ease-out; }
+		.chess-square.black-piece { color: #1b2520; text-shadow: 0 1px #fff8; }
+		.chess-square.white-piece { color: #fffdf3; text-shadow: 0 2px 2px #1c281e; }
+
+		.arcade-canvas { display: block; width: 100%; max-width: 800px; height: auto; margin: auto; border: 1px solid #ffffff30; border-radius: 3px; touch-action: manipulation; }
+		.route-picker { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 12px; }
+		.route-picker .game-button { width: 100%; padding: 0 7px; }
+
+		.wordle-board { display: grid; grid-template-rows: repeat(6, 1fr); gap: 7px; width: min(100%, 310px); margin: 0 auto 20px; }
+		.wordle-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 7px; }
+		.wordle-cell { display: grid; aspect-ratio: 1; place-items: center; border: 2px solid #536159; font-size: 25px; font-weight: 900; text-transform: uppercase; }
+		.wordle-cell.filled { border-color: #b5c7b8; animation: pop-in 120ms ease-out; }
+		.wordle-row.revealing .wordle-cell { animation: word-reveal 460ms ease-out both; animation-delay: calc(var(--cell-index) * 65ms); }
+		.wordle-row.revealing .wordle-cell { animation: word-reveal 460ms ease-out both; animation-delay: calc(var(--cell-index) * 65ms); }
+		.wordle-cell.correct { border-color: #53885e; background: #53885e; }
+		.wordle-cell.present { border-color: #c29b42; background: #c29b42; }
+		.wordle-cell.absent { border-color: #536159; background: #536159; }
+		.wordle-keyboard { display: grid; gap: 6px; width: min(100%, 520px); margin: auto; }
+		.wordle-key-row { display: flex; justify-content: center; gap: 5px; }
+		.wordle-key { min-width: 0; min-height: 43px; flex: 1; padding: 0 4px; border: 0; border-radius: 3px; background: #d5ddd5; color: #20251f; cursor: pointer; font-size: 13px; font-weight: 900; }
+		.wordle-key.wide { flex: 1.5; font-size: 11px; }
+		.wordle-key.correct { background: #53885e; color: white; }
+		.wordle-key.present { background: #c29b42; color: white; }
+		.wordle-key.absent { background: #536159; color: white; }
+		.wordle-key { transition: transform 100ms ease, background 150ms ease; }
+		.wordle-key:active { transform: translateY(2px) scale(.96); }
+
+		.voxel-loading { display: grid; min-height: 520px; place-items: center; color: #d9f36a; font-size: 15px; }
+		.voxel-frame { position: relative; height: min(760px, calc(100vh - 190px)); min-height: 540px; overflow: hidden; border: 1px solid #4e6755; border-radius: 5px; background: #8ac5df; isolation: isolate; }
+		.voxel-canvas { position: absolute; inset: 0; width: 100%; height: 100%; outline: 0; touch-action: none; }
+		.voxel-topbar { position: absolute; z-index: 2; top: 14px; right: 14px; left: 14px; display: flex; align-items: center; justify-content: space-between; gap: 12px; pointer-events: none; }
+		.voxel-brand, .voxel-room-controls, .voxel-presence, .voxel-tools, .voxel-chat { border: 1px solid #e6f0dc56; border-radius: 4px; background: #15251cdd; box-shadow: 0 8px 24px #10201835; color: white; backdrop-filter: blur(12px); }
+		.voxel-brand { padding: 11px 14px; font-family: var(--serif); font-size: 18px; }
+		.voxel-room-controls { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 7px; max-width: 660px; padding: 8px; pointer-events: auto; }
+		.voxel-room-controls input { width: 112px; min-height: 35px; padding: 0 9px; border: 1px solid #ffffff35; border-radius: 3px; background: #ffffff12; color: white; }
+		.voxel-room-controls input::placeholder { color: #d0dbd1; }
+		.voxel-action { min-height: 35px; padding: 0 11px; border: 1px solid #ffffff30; border-radius: 3px; background: #ffffff13; color: white; cursor: pointer; font-size: 12px; font-weight: 800; }
+		.voxel-action.primary { border-color: #d9f36a; background: #d9f36a; color: #243426; }
+		.voxel-action:disabled { cursor: default; opacity: .5; }
+		.voxel-presence { position: absolute; z-index: 2; top: 78px; right: 14px; padding: 9px 12px; font-size: 12px; pointer-events: none; }
+		.voxel-presence strong { color: #d9f36a; }
+		.voxel-tools { position: absolute; z-index: 2; bottom: 14px; left: 14px; display: grid; gap: 9px; max-width: min(390px, calc(100% - 28px)); padding: 10px; }
+		.voxel-mode-row, .voxel-block-row { display: flex; flex-wrap: wrap; gap: 6px; }
+		.voxel-tools .selected { border-color: #d9f36a; background: #d9f36a; color: #243426; }
+		.voxel-block { display: inline-flex; align-items: center; gap: 6px; min-height: 34px; padding: 0 9px; }
+		.voxel-swatch { width: 15px; height: 15px; border: 1px solid #ffffff64; border-radius: 2px; box-shadow: inset 0 2px 2px #ffffff3a; }
+		.voxel-chat { position: absolute; z-index: 2; right: 14px; bottom: 14px; display: flex; width: min(310px, calc(100% - 28px)); max-height: 210px; flex-direction: column; padding: 10px; }
+		.voxel-chat-log { display: flex; min-height: 44px; max-height: 144px; flex-direction: column; gap: 4px; overflow-y: auto; color: #e1e8dc; font-size: 12px; }
+		.voxel-chat-line strong { color: #d9f36a; }
+		.voxel-chat-form { display: flex; gap: 6px; margin-top: 7px; }
+		.voxel-chat-form input { width: 100%; min-width: 0; min-height: 34px; padding: 0 9px; border: 1px solid #ffffff35; border-radius: 3px; background: #ffffff12; color: white; }
+		.voxel-chat-form input::placeholder { color: #d0dbd1; }
+		.voxel-center-prompt { position: absolute; z-index: 1; top: 50%; left: 50%; padding: 8px 12px; border: 1px solid #ffffff40; border-radius: 3px; background: #15251cbb; color: white; font-size: 12px; pointer-events: none; transform: translate(-50%, -50%); }
+		.voxel-frame.locked .voxel-center-prompt { opacity: 0; }
+		.voxel-status { min-height: 16px; color: #d9f36a; font-size: 11px; }
+		.voxel-dpad { display: none; }
+		.game-stage.homework-stage { background: var(--paper); color: var(--ink); }
+		.homework-grid { display: grid; grid-template-columns: minmax(250px, .82fr) minmax(0, 1.18fr); gap: 16px; max-width: 960px; margin: auto; }
+		.homework-pane { min-width: 0; padding: 18px; border: 1px solid var(--line); border-radius: 4px; background: white; }
+		.homework-pane h2 { margin: 0 0 8px; font-family: var(--sans); font-size: 17px; font-weight: 800; }
+		.homework-caption { margin: 0 0 16px; color: var(--muted); font-size: 12px; line-height: 1.5; }
+		.homework-file { display: none; }
+		.homework-drop { display: grid; min-height: 210px; place-items: center; overflow: hidden; border: 1px dashed #a9b2a1; border-radius: 3px; background: #f8f9f4; text-align: center; }
+		.homework-drop.dragging { border-color: var(--green); background: #edf4eb; }
+		.homework-drop img { display: block; max-width: 100%; max-height: 290px; object-fit: contain; }
+		.homework-pick { display: grid; justify-items: center; gap: 8px; padding: 20px; }
+		.homework-pick-icon { display: grid; width: 42px; height: 42px; place-items: center; border-radius: 50%; background: #e6efe1; color: var(--green); font-size: 22px; }
+		.homework-name { overflow: hidden; margin-top: 8px; color: var(--muted); font-size: 11px; text-overflow: ellipsis; white-space: nowrap; }
+		.homework-label { display: block; margin: 14px 0 6px; color: #475349; font-size: 12px; font-weight: 800; }
+		.homework-select, .homework-notes { width: 100%; min-height: 40px; padding: 9px 10px; border: 1px solid var(--line); border-radius: 3px; background: white; color: var(--ink); font: inherit; font-size: 13px; }
+		.homework-notes { min-height: 68px; resize: vertical; }
+		.homework-actions { display: flex; align-items: center; gap: 8px; margin-top: 14px; }
+		.homework-submit { min-height: 40px; padding: 0 14px; border: 0; border-radius: 3px; background: var(--green); color: white; cursor: pointer; font-size: 13px; font-weight: 800; }
+		.homework-submit:disabled { cursor: not-allowed; opacity: .5; }
+		.homework-clear { min-height: 38px; padding: 0 10px; border: 1px solid var(--line); border-radius: 3px; background: white; color: var(--ink); cursor: pointer; font-size: 12px; font-weight: 800; }
+		.homework-privacy { margin: 12px 0 0; color: var(--muted); font-size: 11px; line-height: 1.5; }
+		.homework-answer { min-height: 350px; white-space: pre-wrap; overflow-wrap: anywhere; color: #344136; font-size: 14px; line-height: 1.75; }
+		.homework-answer.placeholder { color: #858b80; }
+		.homework-answer.error { color: #a33e31; }
+		.homework-status { min-height: 20px; margin: 0 0 12px; color: var(--green); font-size: 12px; font-weight: 800; }
+		.gta-stage { background: linear-gradient(180deg, #1a2d2d 0%, #1d2f2a 100%); }
+		.vice-city-stage { display: grid; gap: 14px; min-height: 640px; }
+		.vice-city-hud { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; width: min(100%, 900px); margin: 0 auto; padding: 18px 16px 0; color: #f5f3d4; font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+		.vice-city-hud strong { color: #f2d25b; }
+		.vice-city-wrap { width: min(100%, 900px); margin: 0 auto; }
+		#vice-city-canvas { display: block; width: 100%; height: auto; border: 1px solid rgba(255,255,255,.15); border-radius: 8px; background: linear-gradient(180deg, #1e6d8e 0%, #3d7e88 24%, #c6a86a 24%, #8f7041 26%, #4f8d5a 26%, #264a3d 100%); box-shadow: 0 18px 36px rgba(0,0,0,.24); }
+		.vice-city-controls { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; padding: 0 0 18px; }
+		.vice-city-button { min-height: 36px; padding: 0 14px; border: 1px solid rgba(255,255,255,.18); border-radius: 999px; background: rgba(255,255,255,.06); color: white; cursor: pointer; font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+		.vice-city-button.is-active { border-color: #f2d25b; background: #f2d25b; color: #20251f; }
+		.gta-note { margin: 18px 0 0; color: #9cac9f; font-size: 11px; line-height: 1.6; }
+		@media (max-width: 700px) { .homework-grid { grid-template-columns: 1fr; } .homework-answer { min-height: 180px; } .vice-city-hud { justify-content: center; } }
+		@media (max-width: 720px) {
+			.voxel-frame { height: calc(100vh - 150px); min-height: 600px; }
+			.voxel-topbar { align-items: flex-start; flex-direction: column; }
+			.voxel-room-controls { justify-content: flex-start; }
+			.voxel-presence { top: auto; right: 14px; bottom: 185px; }
+			.voxel-tools { right: 14px; bottom: 14px; max-width: calc(100% - 28px); }
+			.voxel-chat { top: 144px; right: 14px; bottom: auto; width: min(260px, calc(100% - 28px)); max-height: 130px; }
+			.voxel-chat-log { max-height: 72px; }
+			.voxel-dpad { position: absolute; z-index: 2; bottom: 184px; left: 14px; display: grid; grid-template-columns: repeat(3, 42px); gap: 5px; }
+			.voxel-dpad button { min-width: 42px; min-height: 42px; padding: 0; font-size: 18px; }
+		}
+
+		@keyframes pop-in { 50% { transform: scale(1.08); } }
+		@keyframes stage-enter { from { opacity: 0; transform: translateY(10px) scale(.995); } to { opacity: 1; transform: translateY(0) scale(1); } }
+		@keyframes clear-flash { 0% { filter: brightness(1); } 35% { filter: brightness(1.9) saturate(1.25); } 100% { filter: brightness(1); } }
+		@keyframes tile-spawn { from { opacity: .3; transform: scale(.35); } to { opacity: 1; transform: scale(1); } }
+		@keyframes tile-merge { 45% { transform: scale(1.16); box-shadow: 0 0 18px #fff8; } 100% { transform: scale(1); } }
+		@keyframes move-highlight { 0% { filter: brightness(1.45); } 100% { filter: brightness(1); } }
+		@keyframes word-reveal { 0% { transform: rotateX(0); } 50% { transform: rotateX(90deg); } 100% { transform: rotateX(0); } }
+		@keyframes impact-shake { 0%, 100% { transform: translateX(0); } 20%, 60% { transform: translateX(-5px); } 40%, 80% { transform: translateX(5px); } }
+		@keyframes touchdown-glow { 0%, 100% { box-shadow: 0 0 0 #d9f36a00; } 35% { box-shadow: 0 0 34px #d9f36a45; } }
+
+		footer {
+			border-top: 1px solid var(--line);
+			color: var(--muted);
+			font-size: 12px;
+		}
+
+		.footer-inner {
+			display: flex;
+			justify-content: space-between;
+			gap: 16px;
+			width: min(100% - 48px, 1136px);
+			margin: auto;
+			padding: 19px 0;
+		}
+
+		@media (max-width: 850px) {
+			.game-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+		}
+
+		@media (max-width: 620px) {
+			.topbar { padding: 17px 20px; }
+			.top-note { font-size: 11px; }
+			main { width: min(100% - 36px, 480px); }
+			.intro { grid-template-columns: 1fr; gap: 16px; padding: 42px 0 25px; }
+			.intro-copy { max-width: 420px; }
+			.toolbar { align-items: stretch; flex-direction: column-reverse; gap: 10px; }
+			.search-wrap { width: 100%; }
+			.filters { gap: 2px; }
+			.filter { padding: 0 11px; }
+			.game-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+			.game-art { height: 116px; }
+			.game-icon { font-size: 44px; }
+			.game-info { padding: 12px; }
+			.game-title { font-size: 14px; }
+			.play-link { min-height: 30px; padding: 0 9px; }
+			.footer-inner { width: min(100% - 36px, 480px); flex-direction: column; gap: 5px; }
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			*, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+		}
+	</style>
+</head>
+<body>
+	<header class="topbar">
+		<a class="brand" href="#home" aria-label="School Arcade home">
+			<span class="brand-mark" aria-hidden="true">▶</span>
+			<span>SCHOOL ARCADE</span>
+		</a>
+			<div class="top-actions"><span class="top-note">A little play between classes</span><button class="logout-button" id="logout-button" type="button">Sign out</button></div>
+	</header>
+
+		<main id="home">
+		<section class="intro" aria-labelledby="page-title">
+			<div>
+				<p class="eyebrow">The game shelf</p>
+				<h1 id="page-title">Pick your next<br>little adventure.</h1>
+			</div>
+			<p class="intro-copy">Quick puzzles, classic arcade favorites, and worlds to get lost in. Choose a game and jump right in.</p>
+		</section>
+
+		<section aria-label="Browse games">
+			<div class="toolbar">
+				<div class="filters" role="group" aria-label="Filter by game type">
+					<button class="filter" type="button" data-filter="all" aria-pressed="true">All games</button>
+					<button class="filter" type="button" data-filter="arcade" aria-pressed="false">Arcade</button>
+					<button class="filter" type="button" data-filter="puzzle" aria-pressed="false">Puzzle</button>
+					<button class="filter" type="button" data-filter="strategy" aria-pressed="false">Strategy</button>
+				</div>
+				<label class="search-wrap">
+					<input class="search" id="game-search" type="search" aria-label="Search games" placeholder="Find a game..." autocomplete="off">
+				</label>
+			</div>
+
+			<div class="section-heading">
+				<h2>Ready when you are</h2>
+				<span id="result-count" aria-live="polite">9 games</span>
+			</div>
+
+			<div class="game-grid" id="game-grid">
+				<article class="game-card" data-category="puzzle" data-search="tetris blocks falling puzzle">
+					<div class="game-art art-tetris" aria-hidden="true"><span class="game-icon">🧩</span></div>
+					<div class="game-info"><p class="game-category">Puzzle</p><div class="game-title-row"><h3 class="game-title">Tetris</h3><a class="play-link" href="#game/tetris" aria-label="Play Tetris">Play</a></div></div>
+				</article>
+				<article class="game-card" data-category="puzzle" data-search="2048 number tiles merge puzzle">
+					<div class="game-art art-2048" aria-hidden="true"><span class="game-icon">🔢</span></div>
+					<div class="game-info"><p class="game-category">Puzzle</p><div class="game-title-row"><h3 class="game-title">2048</h3><a class="play-link" href="#game/2048" aria-label="Play 2048">Play</a></div></div>
+				</article>
+				<article class="game-card" data-category="strategy" data-search="chess computer strategy board">
+					<div class="game-art art-chess" aria-hidden="true"><span class="game-icon">♟️</span></div>
+					<div class="game-info"><p class="game-category">Strategy</p><div class="game-title-row"><h3 class="game-title">Chess</h3><a class="play-link" href="#game/chess" aria-label="Play chess">Play</a></div></div>
+				</article>
+				<article class="game-card" data-category="arcade" data-search="retro bowl football sports">
+					<div class="game-art art-retro" aria-hidden="true"><span class="game-icon">🏈</span></div>
+					<div class="game-info"><p class="game-category">Sports</p><div class="game-title-row"><h3 class="game-title">Gridiron Drive</h3><a class="play-link" href="#game/gridiron" aria-label="Play Gridiron Drive">Play</a></div></div>
+				</article>
+				<article class="game-card" data-category="arcade" data-search="dinosaur dino runner jump chrome">
+					<div class="game-art art-dino" aria-hidden="true"><span class="game-icon">🦖</span></div>
+					<div class="game-info"><p class="game-category">Arcade</p><div class="game-title-row"><h3 class="game-title">Dino Dash</h3><a class="play-link" href="#game/dino" aria-label="Play Dino Dash">Play</a></div></div>
+				</article>
+				<article class="game-card" data-category="puzzle" data-search="wordle word guess daily puzzle">
+					<div class="game-art art-wordle" aria-hidden="true"><span class="game-icon">🔤</span></div>
+					<div class="game-info"><p class="game-category">Word puzzle</p><div class="game-title-row"><h3 class="game-title">Word Grid</h3><a class="play-link" href="#game/wordle" aria-label="Play Word Grid">Play</a></div></div>
+				</article>
+				<article class="game-card" data-category="arcade" data-search="voxel grove block world build mine multiplayer sandbox">
+					<div class="game-art art-voxel" aria-hidden="true"><span class="game-icon">🧱</span></div>
+					<div class="game-info"><p class="game-category">Sandbox · Multiplayer</p><div class="game-title-row"><h3 class="game-title">Voxel Grove</h3><a class="play-link" href="#game/voxel" aria-label="Play Voxel Grove">Play</a></div></div>
+				</article>
+				<article class="game-card" data-category="puzzle" data-search="homework photo camera image answers explanation study helper">
+					<div class="game-art art-homework" aria-hidden="true"><span class="game-icon">📷</span></div>
+					<div class="game-info"><p class="game-category">Study helper</p><div class="game-title-row"><h3 class="game-title">Homework Cheater</h3><a class="play-link" href="#game/homework" aria-label="Open Homework Cheater">Open</a></div></div>
+				</article>
+				<article class="game-card" data-category="arcade" data-search="gta grand theft auto vice city gta 4 iv rockstar">
+					<div class="game-art art-gta" aria-hidden="true"><span class="game-icon">VC</span></div>
+					<div class="game-info"><p class="game-category">Game access</p><div class="game-title-row"><h3 class="game-title">GTA Vice City</h3><a class="play-link" href="#game/gta" aria-label="Open GTA Vice City access page">Open</a></div></div>
+				</article>
+			</div>
+			<p class="empty-state" id="empty-state">No games found. Try another search.</p>
+		</section>
+	</main>
+
+		<main id="game-view" hidden>
+			<div class="gamebar"><a class="back-link" href="#home">← All games</a><h1 id="game-title">Game</h1><span></span></div>
+			<section class="online-room" id="online-room" aria-label="Online game room" hidden></section>
+			<section class="game-stage" id="game-stage" aria-label="Game"></section>
+		</main>
+
+	<footer><div class="footer-inner"><span>Lakeside Unblocked</span><span>Original games, made to play right here.</span></div></footer>
+
+	<script>
+		const searchInput = document.querySelector("#game-search");
+		const filterButtons = document.querySelectorAll(".filter");
+		const cards = document.querySelectorAll(".game-card");
+		const resultCount = document.querySelector("#result-count");
+		const emptyState = document.querySelector("#empty-state");
+		const homeView = document.querySelector("#home");
+		const gameView = document.querySelector("#game-view");
+		const gameStage = document.querySelector("#game-stage");
+		const gameTitle = document.querySelector("#game-title");
+		const onlineRoomView = document.querySelector("#online-room");
+		document.querySelector("#logout-button").addEventListener("click", async () => {
+			await fetch("/api/logout", { method: "POST" });
+			location.replace("/");
+		});
+		let activeFilter = "all";
+		let activeGame = "";
+		let currentRoom = null;
+		let gameTimer = 0;
+		let animationFrame = 0;
+		let gameKeyHandler = () => {};
+		let gameKeyUpHandler = () => {};
+		let activeGameCleanup = () => {};
+
+		function updateGames() {
+			const query = searchInput.value.trim().toLowerCase();
+			let visibleCount = 0;
+			cards.forEach((card) => {
+				const matchesFilter = activeFilter === "all" || card.dataset.category === activeFilter;
+				const matchesSearch = card.dataset.search.includes(query);
+				card.hidden = !(matchesFilter && matchesSearch);
+				if (!card.hidden) visibleCount += 1;
+			});
+			resultCount.textContent = `${visibleCount} ${visibleCount === 1 ? "game" : "games"}`;
+			emptyState.classList.toggle("visible", visibleCount === 0);
+		}
+
+		searchInput.addEventListener("input", updateGames);
+		filterButtons.forEach((button) => button.addEventListener("click", () => {
+			activeFilter = button.dataset.filter;
+			filterButtons.forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+			updateGames();
+		}));
+
+		function stopGame() {
+			clearInterval(gameTimer);
+			cancelAnimationFrame(animationFrame);
+			gameTimer = 0;
+			animationFrame = 0;
+			activeGameCleanup();
+			activeGameCleanup = () => {};
+			currentRoom?.close();
+			currentRoom = null;
+		}
+
+		function triggerStageEffect(effect, duration) {
+			gameStage.classList.remove(effect);
+			void gameStage.offsetWidth;
+			gameStage.classList.add(effect);
+			setTimeout(() => gameStage.classList.remove(effect), duration);
+		}
+
+		const gameDefinitions = {
+			tetris: { title: "Tetris", setup: setupTetris },
+			"2048": { title: "2048", setup: setup2048 },
+			chess: { title: "Chess", setup: setupChess },
+			gridiron: { title: "Gridiron Drive", setup: setupGridiron },
+			dino: { title: "Dino Dash", setup: setupDino },
+			wordle: { title: "Word Grid", setup: setupWordle },
+			voxel: { title: "Voxel Grove", setup: setupVoxel },
+			homework: { title: "Homework Cheater", setup: setupHomework },
+			gta: { title: "GTA Vice City", setup: setupGtaAccess }
+		};
+
+		function makeRoomCode() {
+			return Math.random().toString(36).slice(2, 8).toUpperCase().padEnd(6, "0");
+		}
+
+		function createGameRoom(gameId) {
+			onlineRoomView.hidden = false;
+			onlineRoomView.innerHTML = `<div class="online-room-head"><div class="online-room-title"><strong>Play together</strong><span id="room-status" class="online-room-status">Connecting to room...</span></div><div class="online-room-controls"><input class="online-room-input" id="room-name" maxlength="18" aria-label="Your room name" placeholder="Your name"><button class="online-room-button primary" id="room-create">New code</button><input class="online-room-input" id="room-code-input" maxlength="8" aria-label="Enter a room code" placeholder="Room code"><button class="online-room-button" id="room-join">Join</button><button class="online-room-button" id="room-copy" disabled>Copy invite</button></div></div><div class="online-room-info"><span>Code <strong class="online-room-code" id="room-code-label">------</strong></span><span class="online-room-players" id="room-members">Waiting for players</span></div><div class="online-room-scores" id="room-scores"></div>`;
+			const status = onlineRoomView.querySelector("#room-status");
+			const nameInput = onlineRoomView.querySelector("#room-name");
+			const roomInput = onlineRoomView.querySelector("#room-code-input");
+			const roomLabel = onlineRoomView.querySelector("#room-code-label");
+			const memberLabel = onlineRoomView.querySelector("#room-members");
+			const scoreList = onlineRoomView.querySelector("#room-scores");
+			const copyButton = onlineRoomView.querySelector("#room-copy");
+			const abort = new AbortController();
+			const { signal } = abort;
+			const state = { socket: null, code: "", playerId: "", players: [], scores: [], lastScore: null, onPlayers: null, onChessMove: null, closed: false };
+
+			function setStatus(text, connected = false) {
+				status.textContent = text;
+				status.classList.toggle("connected", connected);
+			}
+
+			function paintScores() {
+				scoreList.replaceChildren();
+				const ranked = state.scores.slice().sort((a, b) => (b.score ?? b.distance ?? b.touchdowns ?? 0) - (a.score ?? a.distance ?? a.touchdowns ?? 0));
+				ranked.forEach((entry) => {
+					const chip = document.createElement("span"); chip.className = "online-score";
+					const name = document.createElement("strong"); name.textContent = entry.name || "Builder";
+					const result = document.createElement("span");
+					const value = entry.score ?? entry.distance ?? entry.touchdowns ?? 0;
+					result.textContent = `${entry.status ? `${entry.status} · ` : ""}${value}${entry.distance !== undefined ? " m" : " pts"}`;
+					chip.append(name, result); scoreList.append(chip);
+				});
+			}
+
+			function updatePlayers(players) {
+				state.players = players || [];
+				memberLabel.textContent = state.players.length ? `${state.players.length} in room · ${state.players.map((item) => item.name).join(", ")}` : "Waiting for players";
+				state.onPlayers?.(state.players);
+			}
+
+			function connect(code, create) {
+				if (state.socket && state.socket.readyState < WebSocket.CLOSING) state.socket.close(1000, "Changing room");
+				state.code = code.toUpperCase();
+				roomInput.value = state.code;
+				roomLabel.textContent = state.code;
+				copyButton.disabled = true;
+				setStatus("Connecting...");
+				state.scores = [];
+				paintScores();
+				try {
+					const protocol = location.protocol === "https:" ? "wss:" : "ws:";
+					const host = location.host || "localhost:3000";
+					const connection = new WebSocket(`${protocol}//${host}/ws`);
+					state.socket = connection;
+					connection.addEventListener("open", () => connection.send(JSON.stringify({ type: "join", game: gameId, room: state.code, name: nameInput.value || localStorage.getItem("lakesideVoxelName") || "Builder", create })), { signal });
+					connection.addEventListener("message", (event) => {
+						let message; try { message = JSON.parse(event.data); } catch { return; }
+						if (message.type === "joined") {
+						state.playerId = message.playerId;
+						state.code = message.room;
+						roomLabel.textContent = state.code; roomInput.value = state.code;
+						state.scores = message.scores || []; paintScores();
+						copyButton.disabled = false;
+						setStatus("Room connected", true);
+						updatePlayers(message.players);
+						if (state.lastScore) connection.send(JSON.stringify({ type: "game-score", score: state.lastScore }));
+						return;
+						}
+						if (message.type === "error") { setStatus(message.message); return; }
+						if (message.type === "player-joined") { updatePlayers(message.players); return; }
+						if (message.type === "player-left") { updatePlayers(state.players.filter((item) => item.id !== message.id)); return; }
+						if (message.type === "scores") { state.scores = message.scores || []; paintScores(); return; }
+						if (message.type === "chess-reset" && gameId === "chess") state.onChessReset?.();
+						if (message.type === "chess-move" && gameId === "chess") state.onChessMove?.(message);
+					}, { signal });
+					connection.addEventListener("close", () => { if (state.socket === connection && !state.closed) { copyButton.disabled = true; setStatus("Room disconnected"); updatePlayers([]); } }, { signal });
+					connection.addEventListener("error", () => { if (state.socket === connection) setStatus("Server unavailable · run npm start for online play"); }, { signal });
+				} catch { setStatus("Server unavailable · run npm start for online play"); }
+			}
+
+			nameInput.value = localStorage.getItem("lakesideVoxelName") || "";
+			onlineRoomView.querySelector("#room-create").addEventListener("click", () => connect(makeRoomCode(), true), { signal });
+			onlineRoomView.querySelector("#room-join").addEventListener("click", () => {
+				const code = roomInput.value.trim().toUpperCase();
+				if (!code) { setStatus("Enter a room code"); return; }
+				connect(code, false);
+			}, { signal });
+			roomInput.addEventListener("keydown", (event) => { if (event.key === "Enter") onlineRoomView.querySelector("#room-join").click(); }, { signal });
+			nameInput.addEventListener("change", () => localStorage.setItem("lakesideVoxelName", nameInput.value.trim().slice(0, 18)), { signal });
+			copyButton.addEventListener("click", async () => {
+				const invite = new URL(location.href); invite.searchParams.set("room", state.code);
+				try { await navigator.clipboard.writeText(invite.href); setStatus("Invite copied", true); }
+				catch { roomInput.select(); setStatus("Copy the code above", true); }
+			}, { signal });
+
+			const sharedCode = new URLSearchParams(location.search).get("room");
+			connect(sharedCode && /^[A-Z0-9]{4,8}$/i.test(sharedCode) ? sharedCode : makeRoomCode(), !sharedCode);
+			return {
+				get playerId() { return state.playerId; },
+				get code() { return state.code; },
+				get players() { return state.players; },
+				setPlayersHandler(handler) { state.onPlayers = handler; if (state.players.length) handler(state.players); },
+				setChessMoveHandler(handler) { state.onChessMove = handler; },
+				setChessResetHandler(handler) { state.onChessReset = handler; },
+				report(score) { state.lastScore = score; if (state.socket?.readyState === WebSocket.OPEN) state.socket.send(JSON.stringify({ type: "game-score", score })); },
+				sendChessMove(move) { if (state.socket?.readyState === WebSocket.OPEN) state.socket.send(JSON.stringify({ type: "chess-move", move })); },
+				sendChessReset() { if (state.socket?.readyState === WebSocket.OPEN) state.socket.send(JSON.stringify({ type: "chess-reset" })); },
+				close() { state.closed = true; abort.abort(); if (state.socket && state.socket.readyState < WebSocket.CLOSING) state.socket.close(1000, "Leaving game"); onlineRoomView.hidden = true; }
+			};
+		}
+
+		function renderRoute() {
+			stopGame();
+			const match = location.hash.match(/^#game\/([a-z0-9-]+)$/);
+			const game = match && gameDefinitions[match[1]];
+			if (!game) {
+				activeGame = "";
+				onlineRoomView.hidden = true;
+				gameView.hidden = true;
+				homeView.hidden = false;
+				return;
+			}
+			activeGame = match[1];
+			homeView.hidden = true;
+			gameView.hidden = false;
+			gameTitle.textContent = game.title;
+			gameStage.innerHTML = "";
+			currentRoom = ["voxel", "homework", "gta"].includes(match[1]) ? null : createGameRoom(match[1]);
+			const cleanup = game.setup();
+			if (typeof cleanup === "function") activeGameCleanup = cleanup;
+			window.scrollTo(0, 0);
+		}
+
+		window.addEventListener("hashchange", renderRoute);
+		window.addEventListener("keydown", (event) => {
+			if (activeGame && !["INPUT", "TEXTAREA"].includes(document.activeElement.tagName)) gameKeyHandler(event);
+		});
+		window.addEventListener("keyup", (event) => {
+			if (activeGame) gameKeyUpHandler(event);
+		});
+
+		function setupTetris() {
+			gameStage.innerHTML = `<div class="game-layout"><div class="game-board-wrap"><canvas class="tetris-canvas" width="300" height="600" aria-label="Tetris game board"></canvas><div class="mobile-controls"><button class="game-button up" data-tetris="rotate" aria-label="Rotate">↻</button><button class="game-button left" data-tetris="left" aria-label="Move left">←</button><button class="game-button down" data-tetris="down" aria-label="Move down">↓</button><button class="game-button right" data-tetris="right" aria-label="Move right">→</button></div></div><aside class="game-aside"><h2>Stack & clear</h2><div class="stat-row"><span>Score</span><strong id="tetris-score">0</strong></div><div class="stat-row"><span>Lines</span><strong id="tetris-lines">0</strong></div><div class="stat-row"><span>Level</span><strong id="tetris-level">1</strong></div><p class="game-message" id="tetris-message">← → move · ↑ rotate · Space drop</p><div class="button-row"><button class="game-button" id="tetris-pause">Pause</button><button class="game-button" id="tetris-restart">New game</button></div></aside></div>`;
+			const canvas = gameStage.querySelector("canvas");
+			const ctx = canvas.getContext("2d");
+			const colors = ["#43c6ac", "#d9865b", "#7598de", "#e7c94d", "#c779bd", "#63af73", "#de716b"];
+			const shapes = [
+				[[1, 1, 1, 1]], [[1, 0, 0], [1, 1, 1]], [[0, 0, 1], [1, 1, 1]],
+				[[1, 1], [1, 1]], [[0, 1, 1], [1, 1, 0]], [[0, 1, 0], [1, 1, 1]], [[1, 1, 0], [0, 1, 1]]
+			];
+			let board, piece, score, lines, paused, ended;
+			function spawn() {
+				const index = Math.floor(Math.random() * shapes.length);
+				piece = { shape: shapes[index].map((row) => row.slice()), x: 3, y: 0, color: colors[index] };
+				if (collides(piece.shape, piece.x, piece.y)) { ended = true; document.querySelector("#tetris-message").textContent = "Stack topped out. Start a new game."; }
+			}
+			function collides(shape, x, y) {
+				return shape.some((row, dy) => row.some((cell, dx) => cell && (x + dx < 0 || x + dx >= 10 || y + dy >= 20 || (y + dy >= 0 && board[y + dy][x + dx]))));
+			}
+			function draw() {
+				ctx.fillStyle = "#131a16"; ctx.fillRect(0, 0, 300, 600);
+				ctx.strokeStyle = "#ffffff0b"; ctx.lineWidth = 1;
+				for (let x = 30; x < 300; x += 30) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, 600); ctx.stroke(); }
+				for (let y = 30; y < 600; y += 30) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(300, y); ctx.stroke(); }
+				for (let y = 0; y < 20; y++) for (let x = 0; x < 10; x++) if (board[y][x]) drawCell(x, y, board[y][x]);
+				if (piece) {
+					let ghostY = piece.y;
+					while (!collides(piece.shape, piece.x, ghostY + 1)) ghostY++;
+					if (ghostY !== piece.y) piece.shape.forEach((row, dy) => row.forEach((cell, dx) => { if (cell) { ctx.strokeStyle = `${piece.color}aa`; ctx.lineWidth = 2; ctx.strokeRect((piece.x + dx) * 30 + 4, (ghostY + dy) * 30 + 4, 22, 22); } }));
+					piece.shape.forEach((row, dy) => row.forEach((cell, dx) => { if (cell) drawCell(piece.x + dx, piece.y + dy, piece.color); }));
+				}
+			}
+			function drawCell(x, y, color) {
+				ctx.fillStyle = color; ctx.fillRect(x * 30 + 1, y * 30 + 1, 28, 28);
+				ctx.fillStyle = "#ffffff35"; ctx.fillRect(x * 30 + 2, y * 30 + 2, 26, 4);
+			}
+			function lockPiece() {
+				piece.shape.forEach((row, dy) => row.forEach((cell, dx) => { if (cell && piece.y + dy >= 0) board[piece.y + dy][piece.x + dx] = piece.color; }));
+				const remaining = board.filter((row) => row.some((cell) => !cell));
+				const cleared = 20 - remaining.length;
+				if (cleared) { board = Array(cleared).fill(null).map(() => Array(10).fill(0)).concat(remaining); lines += cleared; score += [0, 100, 300, 500, 800][cleared] * Math.ceil(lines / 10); gameStage.classList.remove("line-clear"); void gameStage.offsetWidth; gameStage.classList.add("line-clear"); setTimeout(() => gameStage.classList.remove("line-clear"), 500); }
+				spawn(); updateStats();
+			}
+			function updateStats() {
+				document.querySelector("#tetris-score").textContent = score;
+				document.querySelector("#tetris-lines").textContent = lines;
+				document.querySelector("#tetris-level").textContent = Math.floor(lines / 10) + 1;
+				currentRoom?.report({ score, lines, level: Math.floor(lines / 10) + 1, status: ended ? "Finished" : "Playing" });
+				draw();
+			}
+			function tick() { if (paused || ended) return; piece.y++; if (collides(piece.shape, piece.x, piece.y)) { piece.y--; lockPiece(); } draw(); }
+			function start() { board = Array(20).fill(null).map(() => Array(10).fill(0)); score = 0; lines = 0; paused = false; ended = false; spawn(); updateStats(); clearInterval(gameTimer); gameTimer = setInterval(tick, 550); document.querySelector("#tetris-message").textContent = "← → move · ↑ rotate · Space drop"; document.querySelector("#tetris-pause").textContent = "Pause"; }
+			function act(action) {
+				if (ended || paused) return;
+				if (action === "left" || action === "right") { const dx = action === "left" ? -1 : 1; if (!collides(piece.shape, piece.x + dx, piece.y)) piece.x += dx; }
+				if (action === "down") { piece.y++; if (collides(piece.shape, piece.x, piece.y)) { piece.y--; lockPiece(); } }
+				if (action === "rotate") { const rotated = piece.shape[0].map((_, i) => piece.shape.map((row) => row[i]).reverse()); if (!collides(rotated, piece.x, piece.y)) piece.shape = rotated; }
+				if (action === "drop") { while (!collides(piece.shape, piece.x, piece.y + 1)) piece.y++; lockPiece(); }
+				draw();
+			}
+			gameKeyHandler = (event) => {
+				const actions = { ArrowLeft: "left", ArrowRight: "right", ArrowDown: "down", ArrowUp: "rotate", " ": "drop" };
+				if (actions[event.key]) { event.preventDefault(); act(actions[event.key]); }
+			};
+			gameStage.querySelectorAll("[data-tetris]").forEach((button) => button.addEventListener("click", () => act(button.dataset.tetris)));
+			gameStage.querySelector("#tetris-restart").addEventListener("click", start);
+			gameStage.querySelector("#tetris-pause").addEventListener("click", (event) => { paused = !paused; event.currentTarget.textContent = paused ? "Resume" : "Pause"; });
+			start();
+		}
+
+		function setup2048() {
+			gameStage.innerHTML = `<div class="game-layout"><div class="game-board-wrap"><div class="tiles-board" id="tiles-board" role="grid" aria-label="2048 board"></div><div class="mobile-controls"><button class="game-button up" data-move="up" aria-label="Move up">↑</button><button class="game-button left" data-move="left" aria-label="Move left">←</button><button class="game-button down" data-move="down" aria-label="Move down">↓</button><button class="game-button right" data-move="right" aria-label="Move right">→</button></div></div><aside class="game-aside"><h2>Make 2048</h2><div class="stat-row"><span>Score</span><strong id="tile-score">0</strong></div><div class="stat-row"><span>Best</span><strong id="tile-best">0</strong></div><p class="game-message" id="tile-message">Join matching tiles. Reach 2048 to win.</p><button class="game-button" id="tile-restart">New game</button></aside></div>`;
+			let board, score, finished;
+			const render = (merged = [], spawned = null) => {
+				document.querySelector("#tiles-board").innerHTML = board.map((row, r) => row.map((value, c) => {
+					const wasMerged = merged.some(([mr, mc]) => mr === r && mc === c);
+					const wasSpawned = spawned && spawned[0] === r && spawned[1] === c;
+					return `<div class="tile${wasMerged ? " tile-merged" : ""}${wasSpawned ? " tile-spawn" : ""}" role="gridcell" data-value="${value || ""}">${value || ""}</div>`;
+				}).join("")).join("");
+				document.querySelector("#tile-score").textContent = score;
+				document.querySelector("#tile-best").textContent = Math.max(score, Number(localStorage.getItem("lakeside2048best") || 0));
+				currentRoom?.report({ score, status: board.flat().includes(2048) ? "2048 reached" : finished ? "Game over" : "Playing" });
+			};
+			function spawn() { const empty = []; board.forEach((row, r) => row.forEach((value, c) => { if (!value) empty.push([r, c]); })); if (!empty.length) return null; const [r, c] = empty[Math.floor(Math.random() * empty.length)]; board[r][c] = Math.random() < .9 ? 2 : 4; return [r, c]; }
+			function reset() { board = Array(4).fill(null).map(() => Array(4).fill(0)); score = 0; finished = false; spawn(); render([], spawn()); document.querySelector("#tile-message").textContent = "Join matching tiles. Reach 2048 to win."; }
+			function move(direction) {
+				if (finished) return;
+				const before = JSON.stringify(board);
+				const merged = [];
+				for (let index = 0; index < 4; index++) {
+					const coords = Array.from({ length: 4 }, (_, i) => direction === "left" ? [index, i] : direction === "right" ? [index, 3 - i] : direction === "up" ? [i, index] : [3 - i, index]);
+					const values = coords.map(([r, c]) => board[r][c]).filter(Boolean);
+					for (let i = 0; i < values.length - 1; i++) if (values[i] === values[i + 1]) { values[i] *= 2; score += values[i]; merged.push(coords[i]); values.splice(i + 1, 1); }
+					while (values.length < 4) values.push(0);
+					coords.forEach(([r, c], i) => { board[r][c] = values[i]; });
+				}
+				if (before === JSON.stringify(board)) return;
+				const spawned = spawn(); localStorage.setItem("lakeside2048best", String(Math.max(score, Number(localStorage.getItem("lakeside2048best") || 0))));
+				if (board.flat().includes(2048)) document.querySelector("#tile-message").textContent = "2048! You made it. Keep going or start fresh.";
+				const full = board.flat().every(Boolean);
+				const canMove = board.some((row, r) => row.some((value, c) => value && ((r < 3 && board[r + 1][c] === value) || (c < 3 && board[r][c + 1] === value))));
+				if (full && !canMove) { finished = true; document.querySelector("#tile-message").textContent = "No moves left. Start a new game."; }
+				render(merged, spawned);
+			}
+			gameKeyHandler = (event) => { if (["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(event.key)) { event.preventDefault(); move(event.key.slice(5).toLowerCase()); } };
+			gameStage.querySelectorAll("[data-move]").forEach((button) => button.addEventListener("click", () => move(button.dataset.move)));
+			gameStage.querySelector("#tile-restart").addEventListener("click", reset);
+			reset();
+		}
+
+		function setupChess() {
+			gameStage.innerHTML = `<div class="game-layout"><div class="game-board-wrap"><div class="chess-board" id="chess-board" role="grid" aria-label="Chess board"></div></div><aside class="game-aside"><h2 id="chess-opponent">Chess vs. robot</h2><div class="stat-row"><span>You play</span><strong id="chess-color">White</strong></div><div class="stat-row"><span>Opponent</span><strong id="chess-opponent-name">Robot · Black</strong></div><div class="stat-row"><span>To move</span><strong id="chess-turn">You · White</strong></div><p class="game-message" id="chess-message">Your move. Select a piece.</p><p id="chess-help" style="color:#c3cec5;font-size:12px;line-height:1.6">The robot searches legal replies. Join a room with another player for a live two-player match.</p><button class="game-button" id="chess-restart">New game</button></aside></div>`;
+			let board, turn, selected, legal, ended, lastMove, robotThinking, multiplayer = false, myColor = "white";
+			const initial = ["rnbqkbnr", "pppppppp", "........", "........", "........", "........", "PPPPPPPP", "RNBQKBNR"];
+			const colorOf = (piece) => piece && (piece.type === piece.type.toUpperCase() ? "white" : "black");
+			const newBoard = () => initial.map((row) => Array.from(row, (char) => char === "." ? null : { type: char, moved: false }));
+			const inside = (r, c) => r >= 0 && r < 8 && c >= 0 && c < 8;
+			function attacked(r, c, byColor, position = board) {
+				for (let sr = 0; sr < 8; sr++) for (let sc = 0; sc < 8; sc++) {
+					const piece = position[sr][sc]; if (!piece || colorOf(piece) !== byColor) continue;
+					const kind = piece.type.toLowerCase(), dr = r - sr, dc = c - sc;
+					if (kind === "p" && dr === (byColor === "white" ? -1 : 1) && Math.abs(dc) === 1) return true;
+					if (kind === "n" && Math.abs(dr * dc) === 2) return true;
+					if (kind === "k" && Math.max(Math.abs(dr), Math.abs(dc)) === 1) return true;
+					if ((kind === "b" && Math.abs(dr) === Math.abs(dc)) || (kind === "r" && (dr === 0 || dc === 0)) || (kind === "q" && (Math.abs(dr) === Math.abs(dc) || dr === 0 || dc === 0))) {
+						const steps = Math.max(Math.abs(dr), Math.abs(dc)); const rs = Math.sign(dr), cs = Math.sign(dc); let clear = true;
+						for (let step = 1; step < steps; step++) if (position[sr + step * rs][sc + step * cs]) clear = false;
+						if (clear) return true;
+					}
+				}
+				return false;
+			}
+			function inCheck(color, position = board) {
+				let king;
+				for (let r = 0; r < 8; r++) for (let c = 0; c < 8; c++) if (position[r][c] && position[r][c].type.toLowerCase() === "k" && colorOf(position[r][c]) === color) king = [r, c];
+				return !king || attacked(king[0], king[1], color === "white" ? "black" : "white", position);
+			}
+			function pseudo(r, c, position = board) {
+				const piece = position[r][c]; if (!piece) return [];
+				const color = colorOf(piece), kind = piece.type.toLowerCase(), moves = [];
+				const add = (rr, cc) => { if (inside(rr, cc) && colorOf(position[rr][cc]) !== color) moves.push([rr, cc]); };
+				if (kind === "p") {
+					const dir = color === "white" ? -1 : 1, start = color === "white" ? 6 : 1;
+					if (inside(r + dir, c) && !position[r + dir][c]) { moves.push([r + dir, c]); if (r === start && !position[r + dir * 2][c]) moves.push([r + dir * 2, c]); }
+					for (const dc of [-1, 1]) if (inside(r + dir, c + dc) && position[r + dir][c + dc] && colorOf(position[r + dir][c + dc]) !== color) moves.push([r + dir, c + dc]);
+				} else if (kind === "n") {
+					for (const [dr, dc] of [[-2, -1], [-2, 1], [-1, -2], [-1, 2], [1, -2], [1, 2], [2, -1], [2, 1]]) add(r + dr, c + dc);
+				} else {
+					const dirs = kind === "k" ? [[-1, -1], [-1, 0], [-1, 1], [0, -1], [0, 1], [1, -1], [1, 0], [1, 1]] : kind === "b" ? [[-1, -1], [-1, 1], [1, -1], [1, 1]] : kind === "r" ? [[-1, 0], [1, 0], [0, -1], [0, 1]] : [[-1, -1], [-1, 0], [-1, 1], [0, -1], [0, 1], [1, -1], [1, 0], [1, 1]];
+					for (const [dr, dc] of dirs) for (let step = 1; step < 8; step++) { const rr = r + dr * step, cc = c + dc * step; if (!inside(rr, cc)) break; if (colorOf(position[rr][cc]) === color) break; moves.push([rr, cc]); if (position[rr][cc]) break; if (kind === "k") break; }
+					if (kind === "k" && !piece.moved && !inCheck(color, position)) {
+						const row = color === "white" ? 7 : 0;
+						for (const side of [1, -1]) { const rookCol = side === 1 ? 7 : 0, between = side === 1 ? [5, 6] : [1, 2, 3], kingPath = side === 1 ? [5, 6] : [3, 2]; const rook = position[row][rookCol];
+							if (r === row && c === 4 && rook && rook.type.toLowerCase() === "r" && colorOf(rook) === color && !rook.moved && between.every((col) => !position[row][col]) && kingPath.every((col) => !attacked(row, col, color === "white" ? "black" : "white", position))) moves.push([row, c + side * 2]);
+						}
+					}
+				}
+				return moves;
+			}
+			function applyMove(position, from, to) {
+				const next = position.map((row) => row.map((piece) => piece && { ...piece }));
+				const [fromRow, fromCol] = from, [toRow, toCol] = to;
+				const moving = next[fromRow][fromCol];
+				if (moving.type.toLowerCase() === "k" && Math.abs(toCol - fromCol) === 2) {
+					const rookFrom = toCol > fromCol ? 7 : 0, rookTo = toCol > fromCol ? 5 : 3;
+					next[toRow][rookTo] = next[toRow][rookFrom]; next[toRow][rookFrom] = null; next[toRow][rookTo].moved = true;
+				}
+				next[toRow][toCol] = moving; next[fromRow][fromCol] = null; moving.moved = true;
+				if (moving.type.toLowerCase() === "p" && (toRow === 0 || toRow === 7)) moving.type = colorOf(moving) === "white" ? "Q" : "q";
+				return next;
+			}
+			function legalMoves(r, c, position = board) {
+				const color = colorOf(position[r][c]);
+				return pseudo(r, c, position).filter(([rr, cc]) => !inCheck(color, applyMove(position, [r, c], [rr, cc])));
+			}
+			function allLegalMoves(position, color) {
+				const moves = [];
+				for (let r = 0; r < 8; r++) for (let c = 0; c < 8; c++) if (position[r][c] && colorOf(position[r][c]) === color) {
+					legalMoves(r, c, position).forEach(([toRow, toCol]) => moves.push({ from: [r, c], to: [toRow, toCol] }));
+				}
+				return moves;
+			}
+			function evaluatePosition(position) {
+				const values = { p: 100, n: 315, b: 330, r: 500, q: 900, k: 0 };
+				let score = 0;
+				for (let r = 0; r < 8; r++) for (let c = 0; c < 8; c++) {
+					const piece = position[r][c]; if (!piece) continue;
+					const color = colorOf(piece), kind = piece.type.toLowerCase();
+					const center = 3.5 - (Math.abs(3.5 - r) + Math.abs(3.5 - c)) / 2;
+					const activity = kind === "p" ? (color === "black" ? r : 7 - r) * 4 : kind === "n" || kind === "b" ? center * 9 : 0;
+					score += (color === "black" ? 1 : -1) * (values[kind] + activity);
+				}
+				return score;
+			}
+			function search(position, color, depth, alpha, beta) {
+				if (depth === 0) return evaluatePosition(position);
+				const moves = allLegalMoves(position, color);
+				if (!moves.length) return inCheck(color, position) ? (color === "black" ? -100000 : 100000) : 0;
+				moves.sort((a, b) => Number(Boolean(position[b.to[0]][b.to[1]])) - Number(Boolean(position[a.to[0]][a.to[1]])));
+				if (color === "black") {
+					let best = -Infinity;
+					for (const move of moves) { best = Math.max(best, search(applyMove(position, move.from, move.to), "white", depth - 1, alpha, beta)); alpha = Math.max(alpha, best); if (beta <= alpha) break; }
+					return best;
+				}
+				let best = Infinity;
+				for (const move of moves) { best = Math.min(best, search(applyMove(position, move.from, move.to), "black", depth - 1, alpha, beta)); beta = Math.min(beta, best); if (beta <= alpha) break; }
+				return best;
+			}
+			function chooseRobotMove() {
+				const moves = allLegalMoves(board, "black");
+				let bestScore = -Infinity, bestMoves = [];
+				moves.sort((a, b) => Number(Boolean(board[b.to[0]][b.to[1]])) - Number(Boolean(board[a.to[0]][a.to[1]])));
+				for (const move of moves) {
+					const score = search(applyMove(board, move.from, move.to), "white", 1, -Infinity, Infinity);
+					if (score > bestScore) { bestScore = score; bestMoves = [move]; }
+					else if (score === bestScore) bestMoves.push(move);
+				}
+				return bestMoves[Math.floor(Math.random() * bestMoves.length)];
+			}
+			function renderBoard() {
+				const squares = [];
+				for (let r = 0; r < 8; r++) for (let c = 0; c < 8; c++) {
+					const piece = board[r][c], chosen = selected && selected[0] === r && selected[1] === c;
+					const target = legal.some(([rr, cc]) => rr === r && cc === c);
+					const previousFrom = lastMove && lastMove[0][0] === r && lastMove[0][1] === c;
+					const previousTo = lastMove && lastMove[1][0] === r && lastMove[1][1] === c;
+					const symbols = { K: "♔", Q: "♕", R: "♖", B: "♗", N: "♘", P: "♙", k: "♚", q: "♛", r: "♜", b: "♝", n: "♞", p: "♟" };
+					squares.push(`<button class="chess-square ${(r + c) % 2 ? "dark" : "light"} ${piece ? colorOf(piece) + "-piece" : ""} ${chosen ? "selected" : ""} ${target ? "legal" : ""} ${target && piece ? "occupied" : ""} ${previousFrom ? "last-from" : ""} ${previousTo ? "last-to" : ""}" data-square="${r},${c}" aria-label="${String.fromCharCode(97 + c)}${8 - r}${piece ? " " + colorOf(piece) + " " + piece.type.toUpperCase() : ""}">${piece ? symbols[piece.type] : ""}</button>`);
+				}
+				document.querySelector("#chess-board").innerHTML = squares.join("");
+				document.querySelectorAll("[data-square]").forEach((button) => button.addEventListener("click", () => selectSquare(button.dataset.square.split(",").map(Number))));
+			}
+			function selectSquare([r, c]) {
+				if (ended || robotThinking || (multiplayer ? turn !== myColor : turn !== "white")) return;
+				const piece = board[r][c];
+				if (selected && legal.some(([rr, cc]) => rr === r && cc === c)) {
+					playMove(selected, [r, c]);
+					return;
+				} else if (piece && colorOf(piece) === turn) { selected = [r, c]; legal = legalMoves(r, c); }
+				else { selected = null; legal = []; }
+				renderBoard();
+			}
+			function playMove(from, to, remote = false) {
+				const moving = board[from[0]][from[1]];
+				if (!moving || colorOf(moving) !== turn || !legalMoves(from[0], from[1]).some(([r, c]) => r === to[0] && c === to[1])) return;
+				board = applyMove(board, from, to);
+				lastMove = [from, to]; selected = null; legal = [];
+				if (multiplayer && !remote) currentRoom?.sendChessMove({ from, to });
+				turn = turn === "white" ? "black" : "white";
+				const replies = allLegalMoves(board, turn);
+				const check = inCheck(turn);
+				if (!replies.length) {
+					ended = true;
+					robotThinking = false;
+					const winner = turn === "white" ? "black" : "white";
+					document.querySelector("#chess-message").textContent = check ? (multiplayer ? (winner === myColor ? "Checkmate. You win!" : "Checkmate. Your opponent wins.") : (winner === "white" ? "Checkmate. You win!" : "Checkmate. The robot wins.")) : "Draw by stalemate.";
+				} else if (turn === "black" && !multiplayer) {
+					document.querySelector("#chess-message").textContent = "Robot is studying the board...";
+				} else {
+					document.querySelector("#chess-message").textContent = multiplayer ? (turn === myColor ? `Your move${check ? " · Check!" : "."}` : `Waiting for ${turn === "white" ? "White" : "Black"}${check ? " · Check!" : ""} to move.`) : `Your move${check ? " · Check!" : "."}`;
+				}
+				document.querySelector("#chess-turn").textContent = turn === myColor ? `You · ${turn === "white" ? "White" : "Black"}` : `${multiplayer ? "Opponent" : "Robot"} · ${turn === "white" ? "White" : "Black"}`;
+				renderBoard();
+				if (!ended && turn === "black" && !multiplayer) scheduleRobotMove();
+			}
+			function scheduleRobotMove() {
+				robotThinking = true;
+				gameTimer = setTimeout(() => {
+					if (activeGame !== "chess" || !robotThinking || ended) return;
+					const move = chooseRobotMove();
+					if (move) { robotThinking = false; playMove(move.from, move.to); }
+				}, 320);
+			}
+			function reset() {
+				clearTimeout(gameTimer); gameTimer = 0;
+				board = newBoard(); turn = "white"; selected = null; legal = []; ended = false; lastMove = null; robotThinking = false;
+				document.querySelector("#chess-turn").textContent = myColor === "white" ? "You · White" : `${multiplayer ? "Opponent" : "Robot"} · White`;
+				document.querySelector("#chess-message").textContent = myColor === "white" ? "Your move. Select a piece." : "Waiting for White to move.";
+				renderBoard();
+			}
+			currentRoom?.setPlayersHandler((players) => {
+				const wasMultiplayer = multiplayer;
+				multiplayer = players.length > 1;
+				myColor = multiplayer && players.findIndex((player) => player.id === currentRoom.playerId) > 0 ? "black" : "white";
+				const opponent = players.find((player) => player.id !== currentRoom.playerId);
+				document.querySelector("#chess-opponent").textContent = multiplayer ? `Chess vs. ${opponent?.name || "opponent"}` : "Chess vs. robot";
+				document.querySelector("#chess-color").textContent = myColor === "white" ? "White" : "Black";
+				document.querySelector("#chess-opponent-name").textContent = multiplayer ? `${myColor === "white" ? "Black" : "White"} · ${opponent?.name || "Opponent"}` : "Robot · Black";
+				document.querySelector("#chess-help").textContent = multiplayer ? "Room match: White and Black control their own turns." : "The robot searches legal replies. Join a room with another player for a live two-player match.";
+				if (wasMultiplayer !== multiplayer) reset();
+			});
+			currentRoom?.setChessMoveHandler((message) => {
+				if (!multiplayer || message.id === currentRoom.playerId || ended) return;
+				const piece = board[message.move.from[0]][message.move.from[1]];
+				if (piece && colorOf(piece) !== myColor) playMove(message.move.from, message.move.to, true);
+			});
+			currentRoom?.setChessResetHandler(() => reset());
+			gameStage.querySelector("#chess-restart").addEventListener("click", () => { reset(); if (multiplayer) currentRoom?.sendChessReset(); });
+			reset();
+		}
+
+		function setupGridiron() {
+			gameStage.innerHTML = `<div class="game-layout"><div class="game-board-wrap"><canvas class="arcade-canvas" id="football-field" width="800" height="440" aria-label="Football field"></canvas><div class="route-picker"><button class="game-button selected" data-route="0">Short route</button><button class="game-button" data-route="1">Middle route</button><button class="game-button" data-route="2">Deep route</button></div></div><aside class="game-aside"><h2>Gridiron Drive</h2><div class="stat-row"><span>Score</span><strong id="football-score">0</strong></div><div class="stat-row"><span>Down</span><strong id="football-down">1st &amp; 10</strong></div><div class="stat-row"><span>Field position</span><strong id="football-field-position">Own 20</strong></div><p class="game-message" id="football-message">Choose a route, then throw the pass.</p><button class="game-button" id="football-throw">Throw pass</button><button class="game-button" id="football-reset" style="margin-left:6px">New game</button></aside></div>`;
+			const canvas = document.querySelector("#football-field"), ctx = canvas.getContext("2d");
+			let score, down, yardsToGo, fieldPosition, selectedRoute, busy, defenders, ball, ballTrail, receiver;
+			const routes = [{ x: 535, y: 115 }, { x: 570, y: 220 }, { x: 650, y: 325 }];
+			function draw() {
+				const gradient = ctx.createLinearGradient(0, 0, 0, 440); gradient.addColorStop(0, "#416b4b"); gradient.addColorStop(1, "#31583c"); ctx.fillStyle = gradient; ctx.fillRect(0, 0, 800, 440);
+				ctx.fillStyle = "#22362a"; ctx.fillRect(0, 0, 800, 58); ctx.fillRect(0, 382, 800, 58);
+				for (let i = 0; i < 9; i++) { const x = 40 + i * 90; ctx.fillStyle = i % 2 ? "#ffffff09" : "#00000009"; ctx.fillRect(x, 58, 45, 324); ctx.strokeStyle = "#ffffff6c"; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(x, 60); ctx.lineTo(x, 380); ctx.stroke(); ctx.fillStyle = "#ffffffa0"; ctx.font = "bold 13px sans-serif"; ctx.fillText(String(Math.min(50, i * 10)), x + 5, 82); ctx.fillText(String(Math.min(50, i * 10)), x + 5, 370); }
+				ctx.fillStyle = "#477751"; ctx.fillRect(715, 58, 85, 324); ctx.fillStyle = "#e5ce72"; ctx.font = "bold 18px sans-serif"; ctx.fillText("END ZONE", 720, 222);
+				const qb = { x: 150, y: 220 }; ctx.setLineDash([7, 8]); ctx.strokeStyle = "#f3db78a0"; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(qb.x, qb.y); ctx.quadraticCurveTo(330, routes[selectedRoute].y, routes[selectedRoute].x, routes[selectedRoute].y); ctx.stroke(); ctx.setLineDash([]);
+				function player(x, y, color, number, radius = 17) {
+					ctx.fillStyle = "#101a1680"; ctx.beginPath(); ctx.ellipse(x, y + 15, radius + 7, 7, 0, 0, Math.PI * 2); ctx.fill();
+					const jersey = ctx.createLinearGradient(x - radius, y - radius, x + radius, y + radius); jersey.addColorStop(0, color); jersey.addColorStop(1, "#20251f");
+					ctx.fillStyle = jersey; ctx.beginPath(); ctx.ellipse(x, y + 3, radius, radius * 1.08, 0, 0, Math.PI * 2); ctx.fill();
+					ctx.strokeStyle = "#f5f2df"; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(x - radius * .75, y + 1); ctx.lineTo(x - radius * 1.35, y + 8); ctx.moveTo(x + radius * .75, y + 1); ctx.lineTo(x + radius * 1.35, y + 8); ctx.stroke();
+					ctx.fillStyle = "#ded8c4"; ctx.beginPath(); ctx.ellipse(x, y - radius * .55, radius * .68, radius * .55, 0, Math.PI, Math.PI * 2); ctx.fill(); ctx.fillRect(x - radius * .74, y - radius * .57, radius * 1.48, 4);
+					ctx.fillStyle = "#f5f2df"; ctx.font = `bold ${Math.max(10, radius * .68)}px sans-serif`; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(number, x, y + 5); ctx.textAlign = "left";
+				}
+				ballTrail.forEach((point, index) => { ctx.fillStyle = `rgba(245, 219, 156, ${((index + 1) / ballTrail.length) * .35})`; ctx.beginPath(); ctx.arc(point.x, point.y, 3 + index * .45, 0, Math.PI * 2); ctx.fill(); });
+				player(qb.x, qb.y, "#e2dfd0", "12", 19); player(receiver.x, receiver.y, "#e2dfd0", "84");
+				defenders.forEach(([x, y], i) => player(x, y, "#c65c49", String(21 + i), 17));
+				if (ball) { ctx.save(); ctx.translate(ball.x, ball.y); ctx.rotate(ball.rotation); ctx.fillStyle = "#a76639"; ctx.beginPath(); ctx.ellipse(0, 0, 11, 6, 0, 0, Math.PI * 2); ctx.fill(); ctx.strokeStyle = "#f3e3c1"; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(-4, 0); ctx.lineTo(4, 0); ctx.moveTo(-2, -2); ctx.lineTo(-2, 2); ctx.moveTo(2, -2); ctx.lineTo(2, 2); ctx.stroke(); ctx.restore(); }
+				ctx.fillStyle = "#fff"; ctx.font = "bold 12px sans-serif"; ctx.fillText("LAKESIDE", 23, 34);
+			}
+			function updateHud() { document.querySelector("#football-score").textContent = score; document.querySelector("#football-down").textContent = `${["1st", "2nd", "3rd", "4th"][down - 1]} & ${yardsToGo}`; document.querySelector("#football-field-position").textContent = fieldPosition < 50 ? `Own ${fieldPosition}` : `Opp ${100 - fieldPosition}`; currentRoom?.report({ score, touchdowns: score / 7, status: "Drive in progress" }); }
+			function reset() { score = 0; down = 1; yardsToGo = 10; fieldPosition = 20; selectedRoute = 0; busy = false; defenders = [[390, 155], [430, 270], [520, 215]]; receiver = { x: 300, y: 220 }; ball = null; ballTrail = []; updateHud(); draw(); document.querySelector("#football-message").textContent = "Choose a route, then throw the pass."; }
+			function throwPass() {
+				if (busy) return; busy = true;
+				const target = routes[selectedRoute]; const start = performance.now(); const startX = 150, startY = 220; const duration = 780;
+				function animate(now) {
+					const t = Math.min(1, (now - start) / duration);
+					receiver = { x: 300 + (target.x - 300) * t, y: 220 + (target.y - 220) * t - Math.sin(t * Math.PI) * 18 };
+					ball = { x: startX + (target.x - startX) * t, y: startY + (target.y - startY) * t - Math.sin(t * Math.PI) * 105, rotation: Math.atan2(target.y - startY, target.x - startX) + Math.sin(t * Math.PI) * .25 };
+					ballTrail.push({ x: ball.x, y: ball.y }); if (ballTrail.length > 9) ballTrail.shift();
+					defenders = defenders.map(([x, y]) => [x + (receiver.x - x) * .012, y + (receiver.y - y) * .012]); draw();
+					if (t < 1) animationFrame = requestAnimationFrame(animate);
+					else {
+						const closest = Math.min(...defenders.map(([x, y]) => Math.hypot(x - target.x, y - target.y)));
+						if (closest < 37) { down++; document.querySelector("#football-message").textContent = "Pass broken up. The defense closes in."; triggerStageEffect("impact", 380); }
+						else { const gain = selectedRoute === 0 ? 8 : selectedRoute === 1 ? 14 : 24; fieldPosition += gain; if (fieldPosition >= 100) { score += 7; fieldPosition = 20; down = 1; yardsToGo = 10; document.querySelector("#football-message").textContent = "Touchdown! Seven points on the board."; triggerStageEffect("touchdown", 800); } else if (gain >= yardsToGo) { down = 1; yardsToGo = 10; document.querySelector("#football-message").textContent = `Caught! ${gain} yards and a fresh set of downs.`; } else { yardsToGo -= gain; down++; document.querySelector("#football-message").textContent = `Caught for ${gain} yards. Move the chains.`; } }
+						if (down > 4) { down = 1; yardsToGo = 10; fieldPosition = Math.max(10, fieldPosition - 10); document.querySelector("#football-message").textContent = "Turnover on downs. New possession."; }
+						defenders = [[390, 155], [430, 270], [520, 215]]; receiver = { x: 300, y: 220 }; ball = null; ballTrail = []; busy = false; updateHud(); draw();
+					}
+				}
+				animationFrame = requestAnimationFrame(animate);
+			}
+			gameStage.querySelectorAll("[data-route]").forEach((button) => button.addEventListener("click", () => { if (busy) return; selectedRoute = Number(button.dataset.route); gameStage.querySelectorAll("[data-route]").forEach((item) => item.classList.toggle("selected", item === button)); draw(); }));
+			gameStage.querySelector("#football-throw").addEventListener("click", throwPass);
+			gameStage.querySelector("#football-reset").addEventListener("click", reset);
+			gameKeyHandler = (event) => { if (event.key === "Enter") throwPass(); if (["1", "2", "3"].includes(event.key)) { selectedRoute = Number(event.key) - 1; gameStage.querySelectorAll("[data-route]").forEach((item) => item.classList.toggle("selected", Number(item.dataset.route) === selectedRoute)); draw(); } };
+			reset();
+		}
+
+		function setupDino() {
+			gameStage.innerHTML = `<div class="game-layout"><div class="game-board-wrap"><canvas class="arcade-canvas" id="dino-canvas" width="800" height="300" aria-label="Dinosaur runner game"></canvas><div class="mobile-controls"><button class="game-button up" id="dino-jump">Jump</button><button class="game-button down" id="dino-duck">Duck</button></div></div><aside class="game-aside"><h2>Dino Dash</h2><div class="stat-row"><span>Distance</span><strong id="dino-score">0 m</strong></div><div class="stat-row"><span>Best</span><strong id="dino-best">0 m</strong></div><p class="game-message" id="dino-message">Space or tap Jump to leap over cacti.</p><button class="game-button" id="dino-restart">Start run</button></aside></div>`;
+			const canvas = document.querySelector("#dino-canvas"), ctx = canvas.getContext("2d");
+			let dinoY, velocity, obstacles, score, speed, lastTime, spawnTime, alive, ducking, dust, groundOffset, lastReportedDistance;
+			const ground = 240;
+			function start() { dinoY = ground - 42; velocity = 0; obstacles = []; dust = []; groundOffset = 0; score = 0; speed = 390; lastTime = 0; spawnTime = 0; lastReportedDistance = -1; alive = true; ducking = false; currentRoom?.report({ distance: 0, status: "Running" }); document.querySelector("#dino-message").textContent = "Space or tap Jump to leap over cacti."; cancelAnimationFrame(animationFrame); animationFrame = requestAnimationFrame(frame); }
+			function jump() { if (alive && dinoY >= ground - (ducking ? 24 : 42) - 1) { velocity = -690; for (let i = 0; i < 7; i++) dust.push({ x: 105 + Math.random() * 15, y: ground - 3, vx: -35 - Math.random() * 100, vy: -25 - Math.random() * 70, life: .45 }); } }
+			function draw() {
+				const sky = ctx.createLinearGradient(0, 0, 0, 300); sky.addColorStop(0, "#b7d9d8"); sky.addColorStop(1, "#f0e3bd"); ctx.fillStyle = sky; ctx.fillRect(0, 0, 800, 300);
+				ctx.fillStyle = "#d9e4cb"; ctx.beginPath(); ctx.moveTo(0, 210); ctx.lineTo(150, 130); ctx.lineTo(265, 210); ctx.lineTo(435, 110); ctx.lineTo(620, 210); ctx.lineTo(800, 155); ctx.lineTo(800, 260); ctx.lineTo(0, 260); ctx.fill();
+				ctx.fillStyle = "#62734b"; ctx.fillRect(0, ground, 800, 60); ctx.fillStyle = "#d4c590"; ctx.fillRect(0, ground, 800, 4);
+				ctx.fillStyle = "#d4c59099"; for (let i = 0; i < 18; i++) { const x = ((i * 54 - groundOffset) % 900 + 900) % 900 - 50; ctx.fillRect(x, ground + 18 + (i % 3) * 12, 16 + i % 5 * 3, 2); }
+				ctx.fillStyle = "#e6a65f"; ctx.beginPath(); ctx.arc(680, 65, 25, 0, Math.PI * 2); ctx.fill();
+				dust.forEach((particle) => { ctx.globalAlpha = Math.max(0, particle.life / .45); ctx.fillStyle = "#e2d4aa"; ctx.beginPath(); ctx.arc(particle.x, particle.y, 2 + particle.life * 5, 0, Math.PI * 2); ctx.fill(); }); ctx.globalAlpha = 1;
+				const h = ducking ? 24 : 42; ctx.fillStyle = "#334e49"; ctx.fillRect(90, dinoY, 32, h); ctx.fillRect(108, dinoY - 12, 27, 19); ctx.fillStyle = "#e5dfc5"; ctx.fillRect(125, dinoY - 7, 4, 4); ctx.fillRect(91, dinoY + h - 4, 10, 9); ctx.fillRect(111, dinoY + h - 4, 10, 9);
+				obstacles.forEach((item) => { ctx.fillStyle = "#476249"; ctx.fillRect(item.x, ground - item.h, item.w, item.h); ctx.fillRect(item.x - 8, ground - item.h + 15, 8, 10); ctx.fillRect(item.x + item.w, ground - item.h + 24, 8, 9); });
+				ctx.fillStyle = "#354b43"; ctx.font = "bold 16px monospace"; ctx.fillText(`${Math.floor(score)} M`, 700, 32);
+				if (!alive) { ctx.fillStyle = "#17231dcc"; ctx.fillRect(0, 0, 800, 300); ctx.fillStyle = "white"; ctx.textAlign = "center"; ctx.font = "bold 32px sans-serif"; ctx.fillText("Run over", 400, 135); ctx.font = "16px sans-serif"; ctx.fillText("Tap Start run to try again", 400, 168); ctx.textAlign = "left"; }
+			}
+			function frame(time) {
+				const dt = Math.min((time - (lastTime || time)) / 1000, .04); lastTime = time;
+				if (alive) {
+					score += dt * 10; speed = 390 + Math.min(score * 2.5, 300); velocity += 1900 * dt; dinoY += velocity * dt; if (dinoY > ground - (ducking ? 24 : 42)) { dinoY = ground - (ducking ? 24 : 42); velocity = 0; }
+					groundOffset = (groundOffset + speed * dt * .4) % 54;
+					dust.forEach((particle) => { particle.x += particle.vx * dt; particle.y += particle.vy * dt; particle.vy += 160 * dt; particle.life -= dt; }); dust = dust.filter((particle) => particle.life > 0);
+					spawnTime += dt; if (spawnTime > Math.max(.72, 1.45 - score / 160)) { obstacles.push({ x: 815, w: 21 + Math.random() * 20, h: 25 + Math.random() * 28 }); spawnTime = 0; }
+					obstacles.forEach((item) => item.x -= speed * dt); obstacles = obstacles.filter((item) => item.x > -50);
+					if (obstacles.some((item) => item.x < 122 && item.x + item.w > 90 && dinoY + (ducking ? 24 : 42) > ground - item.h + 7)) { alive = false; document.querySelector("#dino-message").textContent = `Run over at ${Math.floor(score)} m. Give it another go.`; triggerStageEffect("impact", 380); }
+					document.querySelector("#dino-score").textContent = `${Math.floor(score)} m`;
+					const distance = Math.floor(score);
+					if (distance !== lastReportedDistance) { currentRoom?.report({ distance, status: alive ? "Running" : "Finished" }); lastReportedDistance = distance; }
+					const best = Math.max(Math.floor(score), Number(localStorage.getItem("lakesideDinoBest") || 0)); localStorage.setItem("lakesideDinoBest", String(best)); document.querySelector("#dino-best").textContent = `${best} m`;
+				}
+				draw(); animationFrame = requestAnimationFrame(frame);
+			}
+			gameKeyHandler = (event) => { if (event.code === "Space" || event.key === "ArrowUp") { event.preventDefault(); jump(); } if (event.key === "ArrowDown") ducking = alive; };
+			gameKeyUpHandler = (event) => { if (event.key === "ArrowDown") ducking = false; };
+			canvas.addEventListener("pointerdown", jump);
+			gameStage.querySelector("#dino-jump").addEventListener("click", jump);
+			gameStage.querySelector("#dino-duck").addEventListener("pointerdown", () => { ducking = true; });
+			gameStage.querySelector("#dino-duck").addEventListener("pointerup", () => { ducking = false; });
+			gameStage.querySelector("#dino-restart").addEventListener("click", start);
+			document.querySelector("#dino-best").textContent = `${Number(localStorage.getItem("lakesideDinoBest") || 0)} m`;
+			start();
+		}
+
+		function setupWordle() {
+			const words = ["apple", "brave", "cabin", "dance", "eagle", "flame", "grape", "house", "ivory", "jolly", "kneel", "lemon", "music", "night", "ocean", "plant", "quiet", "river", "smile", "tiger", "ultra", "vivid", "whale", "xenon", "young", "zebra"];
+			const day = Math.floor(Date.now() / 86400000);
+			let wordIndex = day % words.length;
+			let answer = words[wordIndex].toUpperCase();
+			gameStage.innerHTML = `<div class="game-layout"><div class="game-board-wrap"><div class="wordle-board" id="wordle-board" aria-label="Six guesses of five letters"></div><div class="wordle-keyboard" id="wordle-keyboard"></div></div><aside class="game-aside"><h2>Word Grid</h2><div class="stat-row"><span>Guesses</span><strong id="wordle-guesses">0 / 6</strong></div><p class="game-message" id="wordle-message">Guess the five-letter word.</p><button class="game-button" id="wordle-restart">New word</button><p style="color:#c3cec5;font-size:12px;line-height:1.6">Green is the right letter in the right spot. Gold is in the word, elsewhere.</p></aside></div>`;
+			let guesses = [], current = "", done = false, revealRow = -1;
+			const keyRows = ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"];
+			function paint() {
+				const board = document.querySelector("#wordle-board");
+				board.innerHTML = Array.from({ length: 6 }, (_, r) => `<div class="wordle-row${r === revealRow ? " revealing" : ""}">${Array.from({ length: 5 }, (_, c) => { const guess = guesses[r] || (r === guesses.length ? current : ""); let mark = ""; if (guesses[r]) { if (guess[c] === answer[c]) mark = "correct"; else if (answer.includes(guess[c])) mark = "present"; else mark = "absent"; } return `<div class="wordle-cell ${guess[c] ? "filled" : ""} ${mark}" style="--cell-index:${c}">${guess[c] || ""}</div>`; }).join("")}</div>`).join("");
+					document.querySelector("#wordle-guesses").textContent = `${guesses.length} / 6`;
+					const marks = {};
+					guesses.forEach((guess) => Array.from(guess).forEach((letter, i) => { const mark = guess[i] === answer[i] ? "correct" : answer.includes(letter) ? "present" : "absent"; if (!marks[letter] || mark === "correct" || (mark === "present" && marks[letter] === "absent")) marks[letter] = mark; }));
+					document.querySelector("#wordle-keyboard").innerHTML = keyRows.map((row) => `<div class="wordle-key-row">${Array.from(row).map((key) => `<button class="wordle-key ${marks[key] || ""}" data-key="${key}">${key}</button>`).join("")}${row === "ZXCVBNM" ? "<button class=\"wordle-key wide\" data-key=\"ENTER\">ENTER</button><button class=\"wordle-key wide\" data-key=\"BACKSPACE\">⌫</button>" : ""}</div>`).join("");
+				document.querySelectorAll("[data-key]").forEach((button) => button.addEventListener("click", () => key(button.dataset.key)));
+			}
+			function key(value) {
+				if (done) return;
+				if (value === "ENTER") { if (current.length !== 5) { document.querySelector("#wordle-message").textContent = "A guess needs five letters."; return; } guesses.push(current); revealRow = guesses.length - 1; const revealed = revealRow; setTimeout(() => { if (revealRow === revealed) revealRow = -1; }, 850); const solved = current === answer; if (solved) { done = true; document.querySelector("#wordle-message").textContent = "You got it. Nice work!"; triggerStageEffect("touchdown", 780); } else if (guesses.length === 6) { done = true; document.querySelector("#wordle-message").textContent = `The word was ${answer}. Try another round.`; } else document.querySelector("#wordle-message").textContent = "Not quite. Try another word."; currentRoom?.report({ score: solved ? 7 - guesses.length : 0, guesses: guesses.length, status: solved ? `Solved in ${guesses.length}` : done ? "Not solved" : `${guesses.length} guesses` }); current = ""; }
+				else if (value === "BACKSPACE") current = current.slice(0, -1);
+				else if (/^[A-Z]$/.test(value) && current.length < 5) current += value;
+				paint();
+			}
+			gameKeyHandler = (event) => { if (event.key === "Enter") key("ENTER"); else if (event.key === "Backspace") key("BACKSPACE"); else if (/^[a-z]$/i.test(event.key)) key(event.key.toUpperCase()); };
+			gameStage.querySelector("#wordle-restart").addEventListener("click", () => { wordIndex = (wordIndex + 1 + Math.floor(Math.random() * (words.length - 1))) % words.length; answer = words[wordIndex].toUpperCase(); guesses = []; current = ""; done = false; revealRow = -1; document.querySelector("#wordle-message").textContent = "Guess the five-letter word."; paint(); });
+			paint();
+		}
+
+		function setupVoxel() {
+			gameStage.innerHTML = '<div class="voxel-loading">Preparing your block world...</div>';
+			import("./voxel.js").then(({ mountVoxelGame }) => {
+				if (activeGame === "voxel") activeGameCleanup = mountVoxelGame(gameStage);
+			}).catch(() => {
+				gameStage.innerHTML = '<p class="game-message">Voxel Grove needs the Lakeside server. Start it with <code>npm start</code> and open this page through that server.</p>';
+			});
+		}
+
+		function setupHomework() {
+			gameStage.classList.add("homework-stage");
+			gameStage.innerHTML = `<div class="homework-grid">
+				<section class="homework-pane" aria-labelledby="homework-upload-title">
+					<h2 id="homework-upload-title">Upload a homework photo</h2>
+					<p class="homework-caption">Take a clear, straight-on photo so every question is easy to read.</p>
+					<input class="homework-file" id="homework-file" type="file" accept="image/jpeg,image/png,image/webp" capture="environment">
+					<button class="homework-drop" id="homework-drop" type="button" aria-label="Choose or take a homework photo">
+						<span class="homework-pick"><span class="homework-pick-icon" aria-hidden="true">+</span><strong>Take photo or choose image</strong><span class="homework-caption">JPG, PNG, or WebP · up to 10 MB</span></span>
+					</button>
+					<p class="homework-name" id="homework-name"></p>
+					<label class="homework-label" for="homework-subject">Subject</label>
+					<select class="homework-select" id="homework-subject"><option>General homework</option><option>Math</option><option>Science</option><option>English</option><option>History</option><option>Other</option></select>
+					<label class="homework-label" for="homework-notes">Anything else the tutor should know?</label>
+					<textarea class="homework-notes" id="homework-notes" maxlength="600" placeholder="For example: show each algebra step"></textarea>
+					<div class="homework-actions"><button class="homework-submit" id="homework-submit" type="button" disabled>Get answers</button><button class="homework-clear" id="homework-clear" type="button" hidden>Remove photo</button></div>
+					<p class="homework-privacy">Your photo is sent to the configured AI service for analysis. Avoid including names, school IDs, or other private details.</p>
+				</section>
+				<section class="homework-pane" aria-labelledby="homework-answer-title">
+					<h2 id="homework-answer-title">Answers and explanations</h2>
+					<p class="homework-status" id="homework-status" aria-live="polite">Answers will appear here.</p>
+					<div class="homework-answer placeholder" id="homework-answer">Add a homework photo to get numbered answers with the steps explained.</div>
+				</section>
+			</div>`;
+
+			const picker = gameStage.querySelector("#homework-file");
+			const drop = gameStage.querySelector("#homework-drop");
+			const submit = gameStage.querySelector("#homework-submit");
+			const clearButton = gameStage.querySelector("#homework-clear");
+			const answer = gameStage.querySelector("#homework-answer");
+			const status = gameStage.querySelector("#homework-status");
+			let selectedFile = null;
+			let previewUrl = "";
+			let requestController = null;
+
+			function setFile(file) {
+				if (!file) return;
+				if (!new Set(["image/jpeg", "image/png", "image/webp"]).has(file.type)) { status.textContent = "Choose a JPG, PNG, or WebP image."; return; }
+				if (file.size > 10 * 1024 * 1024) { status.textContent = "That photo is over 10 MB. Choose a smaller image."; return; }
+				if (previewUrl) URL.revokeObjectURL(previewUrl);
+				selectedFile = file;
+				previewUrl = URL.createObjectURL(file);
+				const image = document.createElement("img"); image.src = previewUrl; image.alt = "Preview of selected homework photo";
+				drop.replaceChildren(image);
+				gameStage.querySelector("#homework-name").textContent = `${file.name} · ${(file.size / 1024 / 1024).toFixed(1)} MB`;
+				status.textContent = "Photo ready. Check that the text is readable.";
+				submit.disabled = false; clearButton.hidden = false;
+			}
+
+			function clearPhoto() {
+				if (previewUrl) URL.revokeObjectURL(previewUrl);
+				previewUrl = ""; selectedFile = null; picker.value = "";
+				drop.innerHTML = '<span class="homework-pick"><span class="homework-pick-icon" aria-hidden="true">+</span><strong>Take photo or choose image</strong><span class="homework-caption">JPG, PNG, or WebP · up to 10 MB</span></span>';
+				gameStage.querySelector("#homework-name").textContent = "";
+				submit.disabled = true; clearButton.hidden = true;
+			}
+
+			function compressPhoto(file) {
+				return new Promise((resolve, reject) => {
+					const image = new Image();
+					const temporaryUrl = URL.createObjectURL(file);
+					image.onload = () => {
+						URL.revokeObjectURL(temporaryUrl);
+						const scale = Math.min(1, 1800 / Math.max(image.naturalWidth, image.naturalHeight));
+						const canvas = document.createElement("canvas");
+						canvas.width = Math.round(image.naturalWidth * scale);
+						canvas.height = Math.round(image.naturalHeight * scale);
+						const context = canvas.getContext("2d");
+						if (!context) { reject(new Error("Could not prepare that image.")); return; }
+						context.drawImage(image, 0, 0, canvas.width, canvas.height);
+						resolve(canvas.toDataURL("image/jpeg", .78));
+					};
+					image.onerror = () => { URL.revokeObjectURL(temporaryUrl); reject(new Error("Could not open that image.")); };
+					image.src = temporaryUrl;
+				});
+			}
+
+			picker.addEventListener("change", () => setFile(picker.files[0]));
+			drop.addEventListener("click", () => picker.click());
+			for (const eventName of ["dragenter", "dragover"]) drop.addEventListener(eventName, (event) => { event.preventDefault(); drop.classList.add("dragging"); });
+			for (const eventName of ["dragleave", "drop"]) drop.addEventListener(eventName, (event) => { event.preventDefault(); drop.classList.remove("dragging"); });
+			drop.addEventListener("drop", (event) => setFile(event.dataTransfer.files[0]));
+			clearButton.addEventListener("click", clearPhoto);
+			submit.addEventListener("click", async () => {
+				if (!selectedFile || submit.disabled) return;
+				const originalLabel = submit.textContent;
+				submit.disabled = true; submit.textContent = "Working...";
+				status.textContent = "Reading the photo and solving the questions...";
+				answer.textContent = "This can take a few seconds."; answer.classList.add("placeholder"); answer.classList.remove("error");
+				requestController = new AbortController();
+				try {
+					const image = await compressPhoto(selectedFile);
+					const response = await fetch("/api/solve-homework", {
+						method: "POST",
+						headers: { "Content-Type": "application/json" },
+						signal: requestController.signal,
+						body: JSON.stringify({ image, subject: gameStage.querySelector("#homework-subject").value, notes: gameStage.querySelector("#homework-notes").value })
+					});
+					const result = await response.json();
+					if (!response.ok) throw new Error(result.error || "The homework request failed.");
+					answer.textContent = result.answer;
+					answer.classList.remove("placeholder", "error");
+					status.textContent = "Finished · check the steps against your class notes.";
+				} catch (error) {
+					if (error.name !== "AbortError") {
+						answer.textContent = error.message || "Could not read that photo. Try a clearer image.";
+						answer.classList.remove("placeholder"); answer.classList.add("error");
+						status.textContent = "Could not finish the request.";
+					}
+				} finally {
+					requestController = null;
+					submit.disabled = !selectedFile;
+					submit.textContent = originalLabel;
+				}
+			});
+
+			return () => {
+				requestController?.abort();
+				if (previewUrl) URL.revokeObjectURL(previewUrl);
+				gameStage.classList.remove("homework-stage");
+			};
+		}
+
+		function setupGtaAccess() {
+			gameStage.classList.add("gta-stage");
+			gameStage.innerHTML = `
+				<div class="vice-city-stage">
+					<div class="vice-city-hud">
+						<div>Cash <strong id="vice-cash">$0</strong></div>
+						<div>Heat <strong id="vice-heat">0</strong></div>
+						<div>Mission <strong id="vice-mission">Cruise</strong></div>
+					</div>
+					<div class="vice-city-wrap">
+						<canvas id="vice-city-canvas" width="900" height="540" aria-label="Vice City driving game"></canvas>
+					</div>
+					<div class="vice-city-controls">
+						<button class="vice-city-button" data-vc="left" type="button">Left</button>
+						<button class="vice-city-button" data-vc="up" type="button">Gas</button>
+						<button class="vice-city-button" data-vc="down" type="button">Brake</button>
+						<button class="vice-city-button" data-vc="right" type="button">Right</button>
+					</div>
+				</div>
+			`;
+
+			const canvas = document.querySelector("#vice-city-canvas");
+			const ctx = canvas.getContext("2d");
+			const cashLabel = document.querySelector("#vice-cash");
+			const heatLabel = document.querySelector("#vice-heat");
+			const missionLabel = document.querySelector("#vice-mission");
+			const world = { width: 1400, height: 900 };
+			const keys = { left: false, right: false, up: false, down: false };
+			const pressedButtons = new Set();
+			const player = { x: 200, y: 340, angle: 0, speed: 0, radius: 18, maxSpeed: 255 };
+			const police = { x: 1160, y: 670, angle: 0, speed: 0, radius: 18 };
+			const safehouse = { x: 1230, y: 175, radius: 36 };
+			const missions = ["Collect the cash drops", "Escape the cops to the safehouse", "Hit the downtown finish line"];
+			const state = { cash: 0, heat: 0, missionIndex: 0, status: missions[0] };
+			let animationId = 0;
+			let pickups = [];
+
+			function clamp(value, min, max) {
+				return Math.min(Math.max(value, min), max);
+			}
+
+			function setButtonState() {
+				document.querySelectorAll("[data-vc]").forEach((button) => {
+					const isPressed = keys[button.dataset.vc] || pressedButtons.has(button.dataset.vc);
+					button.classList.toggle("is-active", isPressed);
+				});
+			}
+
+			function updateHud() {
+				cashLabel.textContent = `$${state.cash}`;
+				heatLabel.textContent = `${Math.round(state.heat)}`;
+				missionLabel.textContent = state.status;
+			}
+
+			function addPickup(x, y) {
+				pickups.push({ x, y, radius: 12, color: "#f8d765" });
+			}
+
+			function resetRun() {
+				player.x = 200; player.y = 340; player.angle = 0; player.speed = 0;
+				police.x = 1160; police.y = 670; police.angle = 0;
+				state.cash = 0; state.heat = 0; state.missionIndex = 0; state.status = missions[0];
+				pickups = [
+					{ x: 480, y: 180, radius: 12, color: "#f8d765" },
+					{ x: 760, y: 260, radius: 12, color: "#f8d765" },
+					{ x: 980, y: 415, radius: 12, color: "#f8d765" }
+				];
+				updateHud();
+			}
+
+			function advanceMission() {
+				if (state.missionIndex < missions.length - 1) {
+					state.missionIndex += 1;
+					state.status = missions[state.missionIndex];
+				}
+				updateHud();
+			}
+
+			function trackButton(action, pressed) {
+				if (pressed) pressedButtons.add(action); else pressedButtons.delete(action);
+				if (action === "left" || action === "right" || action === "up" || action === "down") {
+					keys[action] = pressed;
+				}
+				setButtonState();
+			}
+
+			function handleKey(event, pressed) {
+				const key = event.key.toLowerCase();
+				const movement = { arrowleft: "left", a: "left", arrowright: "right", d: "right", arrowup: "up", w: "up", arrowdown: "down", s: "down" };
+				if (movement[key]) {
+					event.preventDefault();
+					keys[movement[key]] = pressed;
+					setButtonState();
+				}
+			}
+
+			function update(dt) {
+				const steer = (keys.left ? -1 : 0) + (keys.right ? 1 : 0);
+				const throttle = (keys.up ? 1 : 0) - (keys.down ? 0.75 : 0);
+				if (throttle !== 0) player.speed += throttle * 250 * dt;
+				else player.speed *= 0.97;
+				player.speed = clamp(player.speed, -90, player.maxSpeed);
+				player.angle += steer * (0.9 + Math.abs(player.speed) / 180) * dt * 2.4;
+				player.x += Math.cos(player.angle) * player.speed * dt;
+				player.y += Math.sin(player.angle) * player.speed * dt;
+				player.x = clamp(player.x, 35, world.width - 35);
+				player.y = clamp(player.y, 35, world.height - 35);
+
+				if (state.heat > 0) {
+					state.heat = Math.max(0, state.heat - dt * 3.5);
+					const dx = player.x - police.x;
+					const dy = player.y - police.y;
+					police.angle = Math.atan2(dy, dx);
+					police.x += Math.cos(police.angle) * (92 + state.heat * 1.2) * dt;
+					police.y += Math.sin(police.angle) * (92 + state.heat * 1.2) * dt;
+					if (Math.hypot(player.x - police.x, player.y - police.y) < player.radius + police.radius + 12) {
+						state.cash = Math.max(0, state.cash - 100);
+						state.heat = 0;
+						police.x = 1160; police.y = 670;
+						updateHud();
+					}
+				}
+
+				if (state.missionIndex === 0) {
+					for (let i = pickups.length - 1; i >= 0; i--) {
+						const pickup = pickups[i];
+						if (Math.hypot(player.x - pickup.x, player.y - pickup.y) < player.radius + pickup.radius + 8) {
+							pickups.splice(i, 1);
+							state.cash += 150;
+							state.heat = clamp(state.heat + 18, 0, 100);
+							updateHud();
+							if (state.cash >= 450) {
+								state.status = "Head for the safehouse";
+								state.missionIndex = 1;
+								updateHud();
+							}
+						}
+					}
+				}
+
+				if (state.missionIndex === 1) {
+					const distToSafehouse = Math.hypot(player.x - safehouse.x, player.y - safehouse.y);
+					if (distToSafehouse < safehouse.radius + player.radius + 8) {
+						state.heat = Math.max(0, state.heat - 18);
+						if (state.heat <= 5) {
+							state.missionIndex = 2;
+							state.status = "Cruise the downtown strip";
+							updateHud();
+						}
+					}
+				}
+
+				if (state.missionIndex === 2 && Math.hypot(player.x - 645, player.y - 270) < 110) {
+					state.status = "Vice City legend";
+					state.heat = 0;
+					updateHud();
+				}
+			}
+
+			function drawRoads() {
+				ctx.fillStyle = "#448661"; ctx.fillRect(0, 0, canvas.width, canvas.height);
+				ctx.fillStyle = "#0b2c34"; ctx.fillRect(0, 110, canvas.width, 320);
+				ctx.fillStyle = "#f1db7e"; ctx.fillRect(0, 200, canvas.width, 30);
+				ctx.fillStyle = "#f1db7e"; ctx.fillRect(0, 360, canvas.width, 30);
+				ctx.fillStyle = "#f1db7e"; ctx.fillRect(220, 0, 30, canvas.height);
+				ctx.fillStyle = "#f1db7e"; ctx.fillRect(630, 0, 30, canvas.height);
+				ctx.fillStyle = "#1b3a2d"; ctx.fillRect(300, 85, 180, 120);
+				ctx.fillStyle = "#1b3a2d"; ctx.fillRect(660, 120, 180, 170);
+				ctx.fillStyle = "#1b3a2d"; ctx.fillRect(210, 410, 200, 110);
+				ctx.fillStyle = "#1b3a2d"; ctx.fillRect(690, 410, 170, 90);
+				ctx.fillStyle = "#1b3a2d"; ctx.fillRect(80, 480, 600, 50);
+				ctx.fillStyle = "#1b3a2d"; ctx.fillRect(760, 430, 120, 110);
+				for (let i = 0; i < 15; i++) {
+					const x = 80 + i * 52;
+					ctx.fillStyle = "#f7e8bf"; ctx.fillRect(x, 122, 10, 34);
+					ctx.fillRect(x, 382, 10, 34);
+				}
+				for (let i = 0; i < 10; i++) {
+					const y = 120 + i * 35;
+					ctx.fillStyle = "#f7e8bf"; ctx.fillRect(248, y, 34, 10);
+					ctx.fillRect(648, y, 34, 10);
+				}
+			}
+
+			function drawPickup(pickup) {
+				ctx.beginPath(); ctx.arc(pickup.x, pickup.y, pickup.radius + 4, 0, Math.PI * 2); ctx.fillStyle = "rgba(255, 222, 90, .18)"; ctx.fill();
+				ctx.beginPath(); ctx.arc(pickup.x, pickup.y, pickup.radius, 0, Math.PI * 2); ctx.fillStyle = pickup.color; ctx.fill();
+				ctx.fillStyle = "#fff6d7"; ctx.font = "bold 12px sans-serif"; ctx.fillText("$", pickup.x - 3, pickup.y + 4);
+			}
+
+			function drawCar(x, y, angle, color, width = 30, height = 16) {
+				ctx.save();
+				ctx.translate(x, y); ctx.rotate(angle);
+				ctx.fillStyle = "rgba(10, 13, 16, .35)"; ctx.fillRect(-width / 2, height / 2 + 4, width, 4);
+				ctx.fillStyle = color; ctx.fillRect(-width / 2, -height / 2, width, height);
+				ctx.fillStyle = "#dee7ef"; ctx.fillRect(-width / 2 + 3, -height / 2 + 3, width - 6, 6);
+				ctx.fillStyle = "#0b1014"; ctx.fillRect(-width / 2 + 2, -height / 2 + 2, 5, 4); ctx.fillRect(width / 2 - 7, -height / 2 + 2, 5, 4);
+				ctx.fillStyle = "#0b1014"; ctx.fillRect(-width / 2 + 2, height / 2 - 6, 5, 4); ctx.fillRect(width / 2 - 7, height / 2 - 6, 5, 4);
+				ctx.restore();
+			}
+
+			function drawSafehouse() {
+				ctx.beginPath(); ctx.arc(safehouse.x, safehouse.y, safehouse.radius, 0, Math.PI * 2); ctx.fillStyle = "rgba(255, 219, 110, .18)"; ctx.fill();
+				ctx.fillStyle = "#f2d25b"; ctx.fillRect(safehouse.x - 16, safehouse.y - 18, 32, 36);
+				ctx.fillStyle = "#142521"; ctx.fillRect(safehouse.x - 6, safehouse.y - 8, 12, 16);
+			}
+
+			function draw() {
+				drawRoads();
+				for (const pickup of pickups) drawPickup(pickup);
+				drawSafehouse();
+				drawCar(player.x, player.y, player.angle, "#f6d76d", 34, 16);
+				drawCar(police.x, police.y, police.angle, "#d65d60", 30, 16);
+				ctx.fillStyle = "rgba(0,0,0,.22)"; ctx.fillRect(12, 12, 220, 86);
+				ctx.fillStyle = "#f4f0d5"; ctx.font = "bold 13px sans-serif"; ctx.fillText(`Cash: $${state.cash}`, 26, 36); ctx.fillText(`Heat: ${Math.round(state.heat)}`, 26, 56); ctx.fillText(`Mission: ${state.status}`, 26, 76);
+			}
+
+			let lastTimestamp = 0;
+			function tick(timestamp) {
+				const dt = Math.min((timestamp - (lastTimestamp || timestamp)) / 1000, 0.033);
+				lastTimestamp = timestamp;
+				update(dt);
+				draw();
+				animationId = requestAnimationFrame(tick);
+			}
+
+			const onKeyDown = (event) => handleKey(event, true);
+			const onKeyUp = (event) => handleKey(event, false);
+			document.querySelectorAll("[data-vc]").forEach((button) => {
+				button.addEventListener("pointerdown", () => trackButton(button.dataset.vc, true));
+				button.addEventListener("pointerup", () => trackButton(button.dataset.vc, false));
+				button.addEventListener("pointerleave", () => trackButton(button.dataset.vc, false));
+			});
+			window.addEventListener("keydown", onKeyDown);
+			window.addEventListener("keyup", onKeyUp);
+			resetRun();
+			updateHud();
+			animationId = requestAnimationFrame(tick);
+
+			return () => {
+				cancelAnimationFrame(animationId);
+				window.removeEventListener("keydown", onKeyDown);
+				window.removeEventListener("keyup", onKeyUp);
+				gameStage.classList.remove("gta-stage");
+			};
+		}
+
+		renderRoute();
+	</script>
+</body>
+</html>
